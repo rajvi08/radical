@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rajvi's Project Intro (Image Tiles)</title>
+  <style>
+    /* Fill viewport, disable native scrolling */
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: white;
+    }
+
+    /* Container for horizontal tiles */
+    .scroll-container {
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 40px 20px;
+    }
+
+    /* Hide native scrollbar */
+    .scroll-container::-webkit-scrollbar { display: none; }
+    .scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .project-row {
+      display: inline-flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .project-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .project-tile {
+      width: 400px; height: 400px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .project-wrapper:hover .project-tile {
+      transform: scale(1.05);
+    }
+
+    /* Overlay hidden by default */
+    .tile-overlay {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      padding: 12px;
+      box-sizing: border-box;
+      border-radius: 0 0 12px 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: white;
+    }
+    .project-wrapper:hover .tile-overlay {
+      opacity: 1;
+    }
+
+    .tile-overlay h4 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .tile-overlay p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-container" id="projectScroll">
+    <div class="project-row">
+
+      <!-- ABOUT -->
+      <div class="project-wrapper">
+        <a href="about.html" class="project-tile"
+           style="background-image: url('photos_about/img_3.jpeg');"></a>
+        <div class="tile-overlay">
+          <h4>About</h4><p>Rajvi</p>
+        </div>
+      </div>
+
+      <!-- TEXTURE -->
+      <div class="project-wrapper">
+        <a href="texture.html" class="project-tile"
+           style="background-image: url('photos_texture/project1_img2.jpg');"></a>
+        <div class="tile-overlay">
+          <h4>Texture</h4><p>Large Language Object</p>
+        </div>
+      </div>
+
+      <!-- ABBstract -->
+      <div class="project-wrapper">
+        <a href="robotics.html" class="project-tile"
+           style="background-image: url('photos_robotics/photo_3.jpg');"></a>
+        <div class="tile-overlay">
+          <h4>ABBstract</h4><p>Cooperative Robotics</p>
+        </div>
+      </div>
+
+      <!-- HORIZON -->
+      <div class="project-wrapper">
+        <a href="horizon.html" class="project-tile"
+           style="background-image: url('photos_horizon/project3_img5.jpg');"></a>
+        <div class="tile-overlay">
+          <h4>Horizon</h4><p>Telepresence Device</p>
+        </div>
+      </div>
+
+      <!-- BIOMIMICRY -->
+      <div class="project-wrapper">
+        <a href="biomimicry.html" class="project-tile"
+           style="background-image: url('photos_biomimicry/project1_img1.jpg');"></a>
+        <div class="tile-overlay">
+          <h4>Making Across Disciplines</h4><p>Biomimicry</p>
+        </div>
+      </div>
+
+      <!-- TICKLISH -->
+      <div class="project-wrapper">
+        <a href="haptic.html" class="project-tile"
+           style="background-image: url('photos_haptic/project2_img2.png');"></a>
+        <div class="tile-overlay">
+          <h4>Ticklish</h4><p>Haptic Device</p>
+        </div>
+      </div>
+
+      <!-- DIGITAL TOOLS -->
+      <div class="project-wrapper">
+        <a href="digital-tool.html" class="project-tile"
+           style="background-image: url('photos_digitaltool/project2_img2.png');"></a>
+        <div class="tile-overlay">
+          <h4>Digital Tools</h4><p>3D Modelling</p>
+        </div>
+      </div>
+
+      <!-- INFLUX -->
+      <div class="project-wrapper">
+        <a href="auxeticfacade.html" class="project-tile"
+           style="background-image: url('photos_auxeticfacade/project2_img1.jpg');"></a>
+        <div class="tile-overlay">
+          <h4>Influx</h4><p>Transformable Façade</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('projectScroll');
+    let targetScroll = container.scrollLeft;
+
+    function smoothLoop() {
+      // ease 10% closer each frame
+      container.scrollLeft += (targetScroll - container.scrollLeft) * 0.1;
+      requestAnimationFrame(smoothLoop);
+    }
+    smoothLoop();
+
+    container.addEventListener('wheel', function(e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        targetScroll += e.deltaY * 2; // adjust speed here
+      }
+    }, { passive: false });
+  </script>
+</body>
+</html>
+

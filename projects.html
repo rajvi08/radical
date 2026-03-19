@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Present realities - Rajvi Ranjit Patil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      cursor: none;
+    }
+    a, button {
+      cursor: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      color: rgb(233, 30, 140);
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 0;
+      text-align: center;
+      font-family: 'Roboto Mono', monospace;
+      color: transparent;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+    }
+
+    .tabs-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem 0;
+      border-bottom: 2px solid #eee;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      background: transparent;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.95rem;
+      color: #666;
+      cursor: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover {
+      color: #333;
+    }
+    .tab-btn.active {
+      color: rgb(233, 30, 140);
+      border-bottom-color: rgb(233, 30, 140);
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 3rem;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 2rem;
+      border-radius: 0;
+    }
+
+    .tab-panel .text-block {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 0 auto 1.5rem;
+      max-width: 950px;
+      color: #555;
+    }
+
+    .tab-panel h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.5em;
+      margin: 0 0 0.25rem;
+      color: #111;
+    }
+    .tab-panel .tab-subheading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      color: #666;
+      margin: 0 0 1.5rem;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+      border-radius: 0;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+    .side-by-side img {
+      width: 49%;
+      border-radius: 0;
+    }
+    .three-in-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+    .three-in-row img {
+      width: 32%;
+      border-radius: 0;
+    }
+    .side-by-side-gif {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+      margin-top: 40px;
+    }
+    .side-by-side-gif img {
+      width: 49%;
+      object-fit: contain;
+      border-radius: 0;
+    }
+    .two-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+    .two-side img {
+      width: 49%;
+      object-fit: contain;
+      border-radius: 0;
+    }
+    .gif-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 30px;
+    }
+    .gif-row img {
+      width: 24%;
+      object-fit: contain;
+      display: block;
+      border-radius: 0;
+    }
+    .subheading-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px auto 20px auto;
+      width: 95%;
+      max-width: 950px;
+      text-align: center;
+    }
+    .subheading-row h2 {
+      font-family: 'Roboto Mono', monospace;
+      flex: 1;
+      font-size: 1.5em;
+      margin: 0 10px;
+    }
+
+    /* Following ball – matches index page */
+    .follow-ball {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="follow-ball" id="followBall"></div>
+
+  <a href="index.html#projects-gallery" class="back-link">← Back to reality</a>
+
+  <h1>Present realities</h1>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" data-tab="abbstract" type="button">ABBstract</button>
+    <button class="tab-btn" data-tab="horizon" type="button">Horizon</button>
+    <button class="tab-btn" data-tab="influx" type="button">Influx</button>
+    <button class="tab-btn" data-tab="reef-structure" type="button">The Reef Project</button>
+  </div>
+
+  <div id="abbstract" class="tab-panel active">
+    <img src="photos_projects/cooperative_robotics.jpg" alt="ABBstract - Cooperative Robotics">
+    <h2>ABBstract</h2>
+    <p class="tab-subheading">Cooperative Robotics</p>
+    <div class="text-block">
+      <p>This project frames human-robot interaction as a co-creative performance. The robots collaborate with two humans in a timed painting exchange, offering wooden blocks to be painted before retrieving and stacking them into a choreographed composition.</p>
+    </div>
+    <div class="media-container">
+      <img src="photos_robotics/photo_1.png" alt="Robotics Photo 1">
+      <div class="side-by-side">
+        <img src="photos_robotics/photo_2.png" alt="Robotics Photo 2">
+        <img src="photos_robotics/photo_3.jpg" alt="Robotics Photo 3">
+      </div>
+      <video controls>
+        <source src="photos_robotics/video_1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="side-by-side">
+        <img src="photos_robotics/photo_4.png" alt="Robotics Photo 4">
+        <img src="photos_robotics/photo_5.png" alt="Robotics Photo 5">
+      </div>
+      <div class="text-block">
+        <p>While the process appears improvisational, the structure is encoded, placing robotic motion at the center of aesthetic decision-making. The final artwork is not predefined but emerges through interaction: a tangible artifact of shared authorship between human intuition and machine logic.</p>
+      </div>
+      <img src="photos_robotics/photo_6.png" alt="Robotics Photo 6">
+      <div class="text-block">
+        <p>The path is planned differently for both robots. The PET Bot approaches from a lower angle, following soft, curved motion paths that feel intuitive and accommodating, allowing users to interact with ease. In contrast, the POWER Bot moves assertively from the front, tracing dominant, arched trajectories that often challenge the user's space and alter the dynamics of co-creation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="horizon" class="tab-panel">
+    <img src="photos_projects/horizon.jpg" alt="Horizon - Telepresence Device">
+    <h2>Horizon</h2>
+    <p class="tab-subheading">Telepresence Device</p>
+    <div class="text-block">
+      <p>Horizon is a responsive picture frame that displays the sky gradient of any location the user wishes to experience. It offers a moment of telepresence, allowing users to engage in the simple act of watching the sky from anywhere in the world.</p>
+    </div>
+    <div class="media-container">
+      <img src="photos_horizon/project3_img1.jpg" alt="Horizon Image 1">
+      <video controls>
+        <source src="photos_horizon/project3_video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="side-by-side">
+        <img src="photos_horizon/project3_img2.jpg" alt="Horizon Image 2">
+        <img src="photos_horizon/project3_img3.jpg" alt="Horizon Image 3">
+      </div>
+      <div class="text-block">
+        <p>The family of devices comprises two main elements: the frame and an audio device. These incorporate a NeoPixel assembly, an acrylic overlay, and a speaker to recreate sky gradients and ambient soundscapes.</p>
+      </div>
+      <img src="photos_horizon/project3_img4.jpg" alt="Horizon Image 4">
+      <img src="photos_horizon/project3_img5.jpg" alt="Horizon Image 5">
+      <img src="photos_horizon/project3_img6.jpg" alt="Horizon Image 6">
+      <div class="three-in-row">
+        <img src="photos_horizon/project3_img7.jpg" alt="Horizon Image 7">
+        <img src="photos_horizon/project3_img8.jpg" alt="Horizon Image 8">
+        <img src="photos_horizon/project3_img9.jpg" alt="Horizon Image 9">
+      </div>
+      <img src="photos_horizon/project3_img10.png" alt="Horizon Image 10">
+      <div class="text-block">
+        <p>Windows give a sneak peek into the transient world. They frame views, skylines, and beautiful sky gradients. This project delves into creating the feeling of being in a different place (telepresence) and experiencing the ever-changing skylines of various locations.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="influx" class="tab-panel">
+    <img src="photos_projects/influx.jpg" alt="Influx - Transformable Façade">
+    <h2>Influx</h2>
+    <p class="tab-subheading">Transformable Façade</p>
+    <div class="text-block">
+      <p>Influx is a dynamic surface that choreographs the balance between light and shade. Through transformable structures and iridescent materials, it playfully filters light, sometimes letting it in, sometimes holding it back—creating an ever-changing interplay of color and shadow that produces vibrant, shaded space.</p>
+    </div>
+    <div class="media-container">
+      <img src="photos_auxeticfacade/project2_img2.png" alt="Auxetic Facade Image 2">
+      <div class="subheading-row">
+        <h2>Shaded Interiors</h2>
+        <h2>Daylight Modulation</h2>
+        <h2>Radiative Cooling</h2>
+      </div>
+      <div class="side-by-side-gif">
+        <img src="photos_auxeticfacade/p1.gif" alt="GIF 1">
+        <img src="photos_auxeticfacade/p2.gif" alt="GIF 2">
+      </div>
+      <div class="text-block">
+        <p>This system uses simple movements and materials to modulate light softly and responsively. The project evolved as a result of the question, "How might we design a dynamic system that integrates auxetic transformation as a geometrical response to light which results in shading, combined with materials that produce visual color variation effects?"</p>
+      </div>
+      <img src="photos_auxeticfacade/project2_img1.jpg" alt="Auxetic Facade Image 1">
+      <div class="gif-row">
+        <img src="photos_auxeticfacade/gif1.gif" alt="GIF 1">
+        <img src="photos_auxeticfacade/gif2.gif" alt="GIF 2">
+        <img src="photos_auxeticfacade/gif3.gif" alt="GIF 3">
+        <img src="photos_auxeticfacade/gif4.gif" alt="GIF 4">
+      </div>
+      <div class="two-side">
+        <img src="photos_auxeticfacade/project2_img7.jpg" alt="Auxetic Facade Image 7">
+        <img src="photos_auxeticfacade/project2_img3.png" alt="Auxetic Facade Image 3">
+      </div>
+      <div class="text-block">
+        <p>Initial tests were carried out with foam as material. To scale the project, conventional movement technique such as hinge is done in combination with auxetic pattern. The movement takes place in 2 states, open and closed state of the mechanism.</p>
+      </div>
+      <img src="photos_auxeticfacade/project2_img9.png" alt="Auxetic Facade Image 9">
+      <div class="side-by-side">
+        <img src="photos_auxeticfacade/project2_img5.png" alt="Auxetic Facade Image 5">
+        <img src="photos_auxeticfacade/project2_img4.png" alt="Auxetic Facade Image 4">
+      </div>
+    </div>
+  </div>
+
+  <div id="reef-structure" class="tab-panel">
+    <img src="photos_projects/the_reef_project.webp" alt="The Reef Project">
+    <h2>The Reef Project</h2>
+    <p class="tab-subheading">Creating a reef growth structure</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this project here.</p>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    function showTab(tabId) {
+      tabBtns.forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+      tabPanels.forEach(function(panel) {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+      history.replaceState(null, '', '#' + tabId);
+    }
+
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showTab(btn.dataset.tab);
+      });
+    });
+
+    // Open tab from URL hash on load
+    function openFromHash() {
+      const hash = window.location.hash.slice(1);
+      const validIds = ['abbstract', 'horizon', 'influx', 'reef-structure'];
+      if (hash && validIds.includes(hash)) {
+        showTab(hash);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
+    // Following ball
+    const ball = document.getElementById('followBall');
+    let mouseX = 0, mouseY = 0, ballX = 0, ballY = 0;
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    function animate() {
+      ballX += (mouseX - ballX) * 0.1;
+      ballY += (mouseY - ballY) * 0.1;
+      ball.style.left = (ballX - 18) + 'px';
+      ball.style.top = (ballY - 18) + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+</html>

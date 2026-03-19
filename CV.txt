@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rajvi Ranjit Patil - CV</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #fff;
+      color: #000;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 3px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .subsection {
+      margin-bottom: 15px;
+    }
+    .date {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rajvi Ranjit Patil</h1>
+  <div>rp674@cornell.edu</div>
+  <div>[Your Website or Portfolio URL]</div>
+
+  <h2>Education</h2>
+  <div class="section">
+    <div class="subsection">
+      <strong>2024–2026</strong><br />
+      <strong>Cornell University, New York, USA</strong><br />
+      Master of Science in Design Technology (Expected 2026)<br />
+      Year 1: Ithaca Campus &nbsp;|&nbsp; Year 2: Cornell Tech, NYC
+    </div>
+    <div class="subsection">
+      <strong>2018–2023</strong><br />
+      <strong>Marathwada Mitra Mandal’s College of Architecture, Pune, India</strong><br />
+      Bachelor of Architecture (B.Arch), Savitribai Phule Pune University<br />
+      Graduated with First Class with Distinction
+    </div>
+  </div>
+
+  <h2>Employment</h2>
+  <div class="section">
+    <div class="subsection">
+      <strong>Summer 2025</strong><br />
+      <strong>Cornell Tech</strong><br />
+      Teaching Assistant, MakerLAB – Milstein Summer Program<br />
+      Facilitated digital fabrication workshops and supported lab operations
+    </div>
+    <div class="subsection">
+      <strong>Dec 2022 – Aug 2024</strong><br />
+      <strong>Ranjit Estates & Developers, India</strong><br />
+      Partner<br />
+      Led real estate projects across design, execution, and feasibility assessment
+    </div>
+    <div class="subsection">
+      <strong>June 2022 – Nov 2022</strong><br />
+      <strong>Studio Anhad, Lonavala</strong><br />
+      Architectural Intern<br />
+      Assisted in design development, documentation, and site coordination
+    </div>
+    <div class="subsection">
+      <strong>2021 – 2022</strong><br />
+      <strong>Independent Architectural Designer</strong><br />
+      Delivered customized design solutions for private clients, integrating hands-on prototyping with digital workflows
+    </div>
+  </div>
+</body>
+</html>

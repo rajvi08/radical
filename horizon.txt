@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horizon</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Horizon</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>Horizon is a responsive picture frame that displays the gradient sky of anywhere the user wishes to go to. It offers a telepresence moment for the users to engage in the simple act of watching the sky from any geo-cached location.</p>
+    </div>
+
+    <div class="media-container">
+      <img src="photos_horizon/project3_img1.jpg" alt="Horizon Image 1">
+
+      <video controls>
+        <source src="photos_horizon/project3_video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_horizon/project3_img2.jpg" alt="Horizon Image 2">
+        <img src="photos_horizon/project3_img3.jpg" alt="Horizon Image 3">
+      </div>
+
+      <div class="text-block">
+        <p>The family of devices comprise of a frame and an audio device. These combine a neopixel assembly, an acrylic overlay, speaker, to recreate skygradients and ambient soundscapes of each location.</p>
+      </div>
+
+      <img src="photos_horizon/project3_img4.jpg" alt="Horizon Image 4">
+      <img src="photos_horizon/project3_img5.jpg" alt="Horizon Image 5">
+      <img src="photos_horizon/project3_img6.jpg" alt="Horizon Image 6">
+      <img src="photos_horizon/project3_img7.jpg" alt="Horizon Image 7">
+      <img src="photos_horizon/project3_img8.jpg" alt="Horizon Image 8">
+      <img src="photos_horizon/project3_img9.jpg" alt="Horizon Image 9">
+      <img src="photos_horizon/project3_img10.jpg" alt="Horizon Image 10">
+
+      <div class="text-block">
+        <p>Windows give a sneak peek into the transient world. They frame views, skylines, and beautiful sky gradients. This project delves into creating the feeling of being in a different place (telepresence) and experiencing the ever-changing skylines of various locations.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

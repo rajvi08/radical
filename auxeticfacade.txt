@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Influx:Letting Light Play</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+      object-fit: contain;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+      object-fit: contain;
+    }
+
+    .three-in-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .three-in-row img {
+      width: 32%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Influx:Letting Light Play</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>Influx is a dynamic surface that choreographs the balance between light and shade. Through transformable structures and iridescent materials, it playfully filters light, sometimes letting it in, sometimes holding it back. Creating an ever-changing interplay of color & shadow that creates a vibrant & shaded space.</p>
+    </div>
+
+    <div class="media-container">
+      <!-- GIFs side-by-side -->
+      <div class="side-by-side">
+        <img src="photos_auxeticfacade/p1.gif" alt="GIF 1">
+        <img src="photos_auxeticfacade/p2.gif" alt="GIF 2">
+      </div>
+
+      <img src="photos_auxeticfacade/project2_img1.jpg" alt="Auxetic Facade Image 1">
+
+      <div class="side-by-side">
+        <img src="photos_auxeticfacade/project2_img2.jpg" alt="Auxetic Facade Image 2">
+        <img src="photos_auxeticfacade/project2_img3.jpg" alt="Auxetic Facade Image 3">
+      </div>
+
+      <div class="side-by-side">
+        <img src="photos_auxeticfacade/project2_img4.jpg" alt="Auxetic Facade Image 4">
+        <img src="photos_auxeticfacade/project2_img5.jpg" alt="Auxetic Facade Image 5">
+      </div>
+
+      <img src="photos_auxeticfacade/project2_img6.jpg" alt="Auxetic Facade Image 6">
+
+      <div class="three-in-row">
+        <img src="photos_auxeticfacade/project2_img7.jpg" alt="Auxetic Facade Image 7">
+        <img src="photos_auxeticfacade/project2_img8.jpg" alt="Auxetic Facade Image 8">
+        <img src="photos_auxeticfacade/project2_img9.jpg" alt="Auxetic Facade Image 9">
+      </div>
+
+      <div class="text-block">
+        <p>Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.</p>
+        <p>Donec id elit non mi porta gravida at eget metus.</p>
+        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+      </div>
+
+      <video controls>
+        <source src="photos_auxeticfacade/project2_video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+  </div>
+
+</body>
+</html>
+

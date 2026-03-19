@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABBstract Art</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+      color: #888;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+      border-radius: 0;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+      border-radius: 0;
+    }
+
+    /* Following ball */
+    .follow-ball {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, rgba(0, 128, 128, 0.6) 0%, rgba(0, 128, 128, 0.2) 70%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+      mix-blend-mode: multiply;
+      box-shadow: 0 0 15px rgba(0, 128, 128, 0.3);
+    }
+
+    /* Sparkle trail */
+    .sparkle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(0, 128, 128, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkleFade 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Following ball -->
+  <div class="follow-ball" id="followBall"></div>
+
+  <h1>ABBstract Art</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>This project frames human-robot interaction as a co-creative performance. The robots collaborate with two humans in a timed painting exchange, offering wooden blocks to be painted before retrieving and stacking them into a choreographed composition.</p>
+    </div>
+
+    <div class="media-container">
+      <img src="photos_robotics/photo_1.png" alt="Robotics Photo 1">
+
+      <div class="side-by-side">
+        <img src="photos_robotics/photo_2.png" alt="Robotics Photo 2">
+        <img src="photos_robotics/photo_3.jpg" alt="Robotics Photo 3">
+      </div>
+
+      <!-- Video added below Photos 2 and 3 -->
+      <video controls>
+        <source src="photos_robotics/video_1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_robotics/photo_4.png" alt="Robotics Photo 4">
+        <img src="photos_robotics/photo_5.png" alt="Robotics Photo 5">
+      </div>
+
+      <div class="text-block">
+        <p>While the process appears improvisational, the structure is encoded, placing robotic motion at the center of aesthetic decision-making. The final artwork is not predefined but emerges through interaction: a tangible artifact of shared authorship between human intuition and machine logic.</p>
+      </div>
+
+      <img src="photos_robotics/photo_6.png" alt="Robotics Photo 6">
+
+      <div class="text-block">
+        <p>The path is planned differently for both robots. The PET Bot approaches from a lower angle, following soft, curved motion paths that feel intuitive and accommodating, allowing users to interact with ease. In contrast, the POWER Bot moves assertively from the front, tracing dominant, arched trajectories that often challenge the user's space and alter the dynamics of co-creation.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Following ball functionality with sparkles
+    const ball = document.getElementById('followBall');
+    let mouseX = 0;
+    let mouseY = 0;
+    let ballX = 0;
+    let ballY = 0;
+    let speed = 0.1;
+    let lastBallX = 0;
+    let lastBallY = 0;
+    let sparkleCounter = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.parentNode.removeChild(sparkle);
+        }
+      }, 1000);
+    }
+
+    function animate() {
+      lastBallX = ballX;
+      lastBallY = ballY;
+      
+      ballX += (mouseX - ballX) * speed;
+      ballY += (mouseY - ballY) * speed;
+      
+      ball.style.left = ballX - 6 + 'px';
+      ball.style.top = ballY - 6 + 'px';
+      
+      // Create sparkles occasionally
+      sparkleCounter++;
+      if (sparkleCounter % 3 === 0 && (Math.abs(ballX - lastBallX) > 2 || Math.abs(ballY - lastBallY) > 2)) {
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        createSparkle(ballX + offsetX, ballY + offsetY);
+      }
+      
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
+

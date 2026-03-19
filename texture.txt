@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Texture</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify; /* Justified like MS Word's 4th alignment */
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Texture Project</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>Texture is an interactive experience that allows people to feel the contours of objects & surroundings, maps them to spirographic drawings, and transcribes them into AI generated poetry.</p> 
+    </div>
+
+    <div class="media-container">
+      <img src="photos_texture/project1_img1.jpg" alt="Project Image 1">
+
+      <video controls>
+        <source src="photos_texture/project1_video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_texture/project1_img2.jpg" alt="Project Image 2">
+        <img src="photos_texture/project1_img3.jpg" alt="Project Image 3">
+      </div>
+
+      <div class="text-block">
+        <p>A poem is a form of expression that uses (algo) rhythmic language to convey ideas. The curves of objects around us have a rhythmic language too that can be physically felt.</p>
+      </div>
+
+      <img src="photos_texture/project1_img4.jpg" alt="Project Image 4">
+      <img src="photos_texture/project1_img5.png" alt="Project Image 5">
+
+      <div class="text-block">
+        <p>How do we integrate tactility and interaction with physical objects? The project started with touching different textured objects. Curves were induced in the wooden piece using lathe, using the equipment involved understanding the speed, pressure and rhythm of hand movement. Rhythm has been the guiding design principle throughout the process of making and in the final outcome as well.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+

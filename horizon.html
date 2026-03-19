@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horizon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+      color: #888;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+      border-radius: 0;
+    }
+
+    /* Following ball */
+    .follow-ball {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, rgba(0, 128, 128, 0.6) 0%, rgba(0, 128, 128, 0.2) 70%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+      mix-blend-mode: multiply;
+      box-shadow: 0 0 15px rgba(0, 128, 128, 0.3);
+    }
+
+    /* Sparkle trail */
+    .sparkle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(0, 128, 128, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkleFade 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+    }
+
+    .side-by-side,
+    .three-in-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+    }
+
+    .three-in-row img {
+      width: 32%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Following ball -->
+  <div class="follow-ball" id="followBall"></div>
+
+  <h1>Horizon</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>Horizon is a responsive picture frame that displays the sky gradient of any location the user wishes to experience. It offers a moment of telepresence, allowing users to engage in the simple act of watching the sky from anywhere in the world.</p>
+    </div>
+
+    <div class="media-container">
+      <img src="photos_horizon/project3_img1.jpg" alt="Horizon Image 1">
+
+      <video controls>
+        <source src="photos_horizon/project3_video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_horizon/project3_img2.jpg" alt="Horizon Image 2">
+        <img src="photos_horizon/project3_img3.jpg" alt="Horizon Image 3">
+      </div>
+
+      <div class="text-block">
+        <p>The family of devices comprises two main elements: the frame and an audio device. These incorporate a NeoPixel assembly, an acrylic overlay, and a speaker to recreate sky gradients and ambient soundscapes.</p>
+      </div>
+
+      <img src="photos_horizon/project3_img4.jpg" alt="Horizon Image 4">
+      <img src="photos_horizon/project3_img5.jpg" alt="Horizon Image 5">
+      <img src="photos_horizon/project3_img6.jpg" alt="Horizon Image 6">
+
+      <div class="three-in-row">
+        <img src="photos_horizon/project3_img7.jpg" alt="Horizon Image 7">
+        <img src="photos_horizon/project3_img8.jpg" alt="Horizon Image 8">
+        <img src="photos_horizon/project3_img9.jpg" alt="Horizon Image 9">
+      </div>
+
+      <img src="photos_horizon/project3_img10.png" alt="Horizon Image 10">
+
+      <div class="text-block">
+        <p>Windows give a sneak peek into the transient world. They frame views, skylines, and beautiful sky gradients. This project delves into creating the feeling of being in a different place (telepresence) and experiencing the ever-changing skylines of various locations.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Following ball functionality with sparkles
+    const ball = document.getElementById('followBall');
+    let mouseX = 0;
+    let mouseY = 0;
+    let ballX = 0;
+    let ballY = 0;
+    let speed = 0.1;
+    let lastBallX = 0;
+    let lastBallY = 0;
+    let sparkleCounter = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.parentNode.removeChild(sparkle);
+        }
+      }, 1000);
+    }
+
+    function animate() {
+      lastBallX = ballX;
+      lastBallY = ballY;
+      
+      ballX += (mouseX - ballX) * speed;
+      ballY += (mouseY - ballY) * speed;
+      
+      ball.style.left = ballX - 6 + 'px';
+      ball.style.top = ballY - 6 + 'px';
+      
+      // Create sparkles occasionally
+      sparkleCounter++;
+      if (sparkleCounter % 3 === 0 && (Math.abs(ballX - lastBallX) > 2 || Math.abs(ballY - lastBallY) > 2)) {
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        createSparkle(ballX + offsetX, ballY + offsetY);
+      }
+      
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
+

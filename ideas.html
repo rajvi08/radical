@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Radical prototypes - Rajvi Ranjit Patil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      cursor: none;
+    }
+    a, button {
+      cursor: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      color: rgb(233, 30, 140);
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 0;
+      text-align: center;
+      font-family: 'Roboto Mono', monospace;
+      color: transparent;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+    }
+    .what-if {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.4em;
+      margin: 0.5rem 0 1.5rem;
+      min-height: 2em;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1.5rem;
+      text-align: left;
+    }
+    .what-if .what-if-static {
+      color: rgb(233, 30, 140);
+      font-weight: 600;
+      display: inline-block;
+      width: 5.5em;
+      text-align: left;
+    }
+    .what-if .fill {
+      color: #111;
+    }
+
+    .tabs-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem 0;
+      border-bottom: 2px solid #eee;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      background: transparent;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.95rem;
+      color: #666;
+      cursor: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover {
+      color: #333;
+    }
+    .tab-btn.active {
+      color: rgb(233, 30, 140);
+      border-bottom-color: rgb(233, 30, 140);
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 3rem;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 2rem;
+      border-radius: 0;
+    }
+
+    .tab-panel .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 0 auto 1.5rem;
+      max-width: 950px;
+      color: #555;
+    }
+
+    .tab-panel h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5em;
+      margin: 0 0 0.25rem;
+      color: #111;
+    }
+    .tab-panel .tab-subheading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      color: #666;
+      margin: 0 0 1.5rem;
+    }
+
+    /* Following ball – matches index page dot */
+    .follow-ball {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="follow-ball" id="followBall"></div>
+
+  <a href="index.html#renders-gallery" class="back-link">← Back to reality</a>
+
+  <h1>Radical prototypes</h1>
+  <p class="what-if" id="whatIf"><span class="what-if-static">What if </span><span class="fill" id="whatIfFill">clothing and footwear could be designed and produced on-demand, tailored precisely to your body</span>?</p>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" data-tab="bespoke-apparel" data-whatif="clothing and footwear could be designed and produced on-demand, tailored precisely to your body" type="button">Bespoke Apparel</button>
+    <button class="tab-btn" data-tab="memory-device" data-whatif="memories could be recreated as immersive, multi-sensory environments—through light, sound, smell, and ambience" type="button">Memory Device</button>
+    <button class="tab-btn" data-tab="moduon" data-whatif="buildings were made of plug-and-play modules that generate energy, filter air, and process water within the same system" type="button">Modulon</button>
+    <button class="tab-btn" data-tab="programmable-matter" data-whatif="AI could be controlled through a shapeable, clay-like interface" type="button">Programmable Matter</button>
+    <button class="tab-btn" data-tab="reef-structure" data-whatif="we could create a reef growth structure" type="button">The Reef Project</button>
+  </div>
+
+  <div id="bespoke-apparel" class="tab-panel active">
+    <img src="photos_ideas/bespoke_apparel.png" alt="Bespoke Apparel render">
+    <h2>Bespoke Apparel</h2>
+    <p class="tab-subheading">A new method for purchasing and wearing clothes</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    </div>
+  </div>
+
+  <div id="memory-device" class="tab-panel">
+    <img src="photos_ideas/memory_device.png" alt="Memory Device render">
+    <h2>Memory Device</h2>
+    <p class="tab-subheading">A device to capture and recreate a person's memory</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    </div>
+  </div>
+
+  <div id="moduon" class="tab-panel">
+    <img src="photos_ideas/moduon.png" alt="Modulon render">
+    <h2>Modulon</h2>
+    <p class="tab-subheading">Creating panels that produce energy, filter water & filter air</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    </div>
+  </div>
+
+  <div id="programmable-matter" class="tab-panel">
+    <img src="photos_ideas/programmabe_matter.png" alt="Programmable Matter render">
+    <h2>Programmable Matter</h2>
+    <p class="tab-subheading">Adaptive material systems</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    </div>
+  </div>
+
+  <div id="reef-structure" class="tab-panel">
+    <img src="photos_ideas/reef_structure.webp" alt="The Reef Project render">
+    <h2>The Reef Project</h2>
+    <p class="tab-subheading">Creating a reef growth structure</p>
+    <div class="text-block">
+      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    const whatIfFill = document.getElementById('whatIfFill');
+    function showTab(tabId) {
+      tabBtns.forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+        if (btn.dataset.tab === tabId && btn.dataset.whatif && whatIfFill) {
+          whatIfFill.textContent = btn.dataset.whatif;
+        }
+      });
+      tabPanels.forEach(function(panel) {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+      history.replaceState(null, '', '#' + tabId);
+    }
+
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showTab(btn.dataset.tab);
+      });
+    });
+
+    // Open tab from URL hash on load
+    function openFromHash() {
+      const hash = window.location.hash.slice(1);
+      const validIds = ['bespoke-apparel', 'memory-device', 'moduon', 'programmable-matter', 'reef-structure'];
+      if (hash && validIds.includes(hash)) {
+        showTab(hash);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    // Set initial what-if from active tab
+    var activeBtn = document.querySelector('.tab-btn.active');
+    if (activeBtn && activeBtn.dataset.whatif && whatIfFill) {
+      whatIfFill.textContent = activeBtn.dataset.whatif;
+    }
+
+    // Following ball
+    const ball = document.getElementById('followBall');
+    let mouseX = 0, mouseY = 0, ballX = 0, ballY = 0;
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    function animate() {
+      ballX += (mouseX - ballX) * 0.1;
+      ballY += (mouseY - ballY) * 0.1;
+      ball.style.left = (ballX - 18) + 'px';
+      ball.style.top = (ballY - 18) + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABBstract Art</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ABBstract Art</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>This project frames human-robot interaction as a co-creative performance. The robots collaborate with two humans in a timed painting exchange, offering wooden blocks to be painted before retrieving and stacking them into a choreographed composition.</p>
+    </div>
+
+    <div class="media-container">
+      <img src="photos_robotics/Photo_1.png" alt="Robotics Photo 1">
+
+      <!-- Video added below Photo 1 -->
+      <video controls>
+        <source src="photos_robotics/video_1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_robotics/Photo_2.png" alt="Robotics Photo 2">
+        <img src="photos_robotics/Photo_3.jpg" alt="Robotics Photo 3">
+      </div>
+
+      <div class="text-block">
+        <p>While the process appears improvisational, the structure is encoded, placing robotic motion at the center of aesthetic decision-making. The final artwork is not predefined but emerges through interaction: a tangible artifact of shared authorship between human intuition and machine logic.</p>
+      </div>
+
+      <img src="photos_robotics/Photo_4.png" alt="Robotics Photo 4">
+      <img src="photos_robotics/Photo_5.png" alt="Robotics Photo 5">
+
+      <div class="text-block">
+        <p>The path is planned differently for both robots. The PET Bot approaches from a lower angle, following soft, curved motion paths that feel intuitive and accommodating, allowing users to interact with ease. In contrast, the POWER Bot moves assertively from the front, tracing dominant, arched trajectories that often challenge the user's space and alter the dynamics of co-creation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
