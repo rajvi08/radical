@@ -839,6 +839,14 @@
           if (gallery) gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
       }
+      // When arriving with #projects-gallery (e.g. from "Back to future"), skip intro and scroll to Present realities
+      if (window.location.hash === '#projects-gallery') {
+        hideCover();
+        requestAnimationFrame(function() {
+          const gallery = document.getElementById('projects-gallery');
+          if (gallery) gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
     })();
 
     // Extend pink/yellow only when intro photo is in view; align height with photo top/bottom; transition only when image is seen

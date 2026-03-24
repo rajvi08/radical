@@ -33,9 +33,9 @@
     h1 {
       font-size: clamp(1.8rem, 5vw, 3.2rem);
       font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 0;
-      text-align: center;
+      margin: 20px 0 0 calc(1.5rem + 20px);
+      max-width: 850px;
+      text-align: left;
       font-family: 'Roboto Mono', monospace;
       color: transparent;
       -webkit-text-stroke: 2px rgb(233, 30, 140);
@@ -44,12 +44,9 @@
     .what-if {
       font-family: 'Roboto Mono', monospace;
       font-size: 1.4em;
-      margin: 0.5rem 0 1.5rem;
+      margin: 0.5rem 0 1.5rem calc(1.5rem + 20px);
       min-height: 2em;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0 1.5rem;
+      max-width: 850px;
       text-align: left;
     }
     .what-if .what-if-static {
@@ -61,16 +58,16 @@
     }
     .what-if .fill {
       color: #111;
+      font-style: italic;
     }
 
     .tabs-row {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 1rem 1.5rem 0;
+      justify-content: space-between;
+      max-width: 850px;
+      margin: 0 0 2rem calc(1.5rem + 20px);
+      padding: 1rem 0 0;
       border-bottom: 2px solid #eee;
-      margin-bottom: 2rem;
     }
     .tab-btn {
       padding: 0.6rem 1.2rem;
@@ -95,8 +92,8 @@
 
     .tab-panel {
       display: none;
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: 980px;
+      margin: 0 0 0 1.5rem;
       padding: 0 20px 3rem;
     }
     .tab-panel.active {
@@ -108,30 +105,97 @@
       max-height: 70vh;
       object-fit: contain;
       display: block;
-      margin: 0 auto 2rem;
+      margin: 0 0 2rem;
       border-radius: 0;
+    }
+    .photos-side-by-side {
+      display: flex;
+      gap: 1rem;
+      margin: 0 0 2rem;
+      max-width: 850px;
+    }
+    .photos-side-by-side img {
+      flex: 1;
+      width: 0;
+      min-width: 0;
+      margin: 0;
+      max-height: 50vh;
+    }
+    .photo-narrative {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 980px;
+    }
+    .photo-narrative img {
+      width: auto;
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      object-position: left;
+      display: block;
+      margin: 0;
     }
 
     .tab-panel .text-block {
+      font-family: 'Roboto Mono', monospace;
       font-size: 1.2em;
       line-height: 1.6em;
-      text-align: justify;
-      margin: 0 auto 1.5rem;
-      max-width: 950px;
-      color: #555;
+      text-align: left;
+      margin: 0 0 1.5rem;
+      max-width: 850px;
+      color: black;
     }
 
     .tab-panel h2 {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto Mono', monospace;
       font-size: 1.5em;
-      margin: 0 0 0.25rem;
+      margin: 0 0 0.75rem;
+      text-align: left;
       color: #111;
     }
     .tab-panel .tab-subheading {
       font-family: 'Roboto Mono', monospace;
       font-size: 1rem;
-      color: #666;
+      text-align: left;
+      color: black;
+      margin: 0 0 2rem;
+    }
+    .speculative-section {
+      margin-bottom: 1.5rem;
+      max-width: 850px;
+    }
+    .speculative-section h3 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: black;
+      margin: 0 0 0.5rem;
+      text-align: left;
+    }
+    .speculative-section p {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      line-height: 1.6em;
+      text-align: left;
+      margin: 0;
+      color: black;
+    }
+    .highlight-yellow {
+      background-color: #ffff00;
+      padding: 0 0.15em;
+    }
+    .project-meta {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      color: black;
       margin: 0 0 1.5rem;
+      padding-top: 0.5rem;
+      max-width: 850px;
+      line-height: 1.5;
+    }
+    .project-meta p {
+      margin: 0.25rem 0;
     }
 
     /* Following ball – matches index page dot */
@@ -161,51 +225,122 @@
     <button class="tab-btn" data-tab="memory-device" data-whatif="memories could be recreated as immersive, multi-sensory environments—through light, sound, smell, and ambience" type="button">Memory Device</button>
     <button class="tab-btn" data-tab="moduon" data-whatif="buildings were made of plug-and-play modules that generate energy, filter air, and process water within the same system" type="button">Modulon</button>
     <button class="tab-btn" data-tab="programmable-matter" data-whatif="AI could be controlled through a shapeable, clay-like interface" type="button">Programmable Matter</button>
-    <button class="tab-btn" data-tab="reef-structure" data-whatif="we could create a reef growth structure" type="button">The Reef Project</button>
   </div>
 
   <div id="bespoke-apparel" class="tab-panel active">
-    <img src="photos_ideas/bespoke_apparel.png" alt="Bespoke Apparel render">
     <h2>Bespoke Apparel</h2>
-    <p class="tab-subheading">A new method for purchasing and wearing clothes</p>
-    <div class="text-block">
-      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    <p class="tab-subheading">Closed loop system for clothing</p>
+    <div class="speculative-section">
+      <h3>Current narrative</h3>
+      <p>Clothing today is selected from pre-defined options. Users browse, choose from <span class="highlight-yellow">standardized sizes</span>, and <span class="highlight-yellow">accumulate garments over time</span>, often with poor fit and redundancy. This <span class="highlight-yellow">linear system</span> disconnects the body from production, resulting in <span class="highlight-yellow">excess inventory and waste</span>.</p>
+      <img src="photos_speculative/current_apparel.JPG" alt="Current apparel">
+    </div>
+    <div class="speculative-section">
+      <h3>Possible narrative</h3>
+      <p>The process begins with the body. A user is scanned, generating a <span class="highlight-yellow">precise model</span> that directly <span class="highlight-yellow">informs fabrication</span>. <span class="highlight-yellow">Garments</span> are created on demand, potentially through <span class="highlight-yellow">spray-based materials</span>, <span class="highlight-yellow">on morphable forms</span> that match the body exactly. Clothing becomes adaptive, continuously updated, and part of a <span class="highlight-yellow">closed-loop system</span> rather than a static product.</p>
+      <img src="photos_speculative/future_apparel.JPG" alt="Future apparel">
+    </div>
+    <div class="speculative-section">
+      <h3>What space does it impact?</h3>
+      <p>It <span class="highlight-yellow">reshapes fashion</span>, <span class="highlight-yellow">manufacturing</span>, and <span class="highlight-yellow">sustainability</span> by <span class="highlight-yellow">replacing mass production</span> with <span class="highlight-yellow">localized</span>, <span class="highlight-yellow">data-driven fabrication</span>. This directly addresses textile waste, where a large portion of garments are never used or discarded early.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Who are the people involved?</h3>
+      <p>Users, micro-factories, material innovators, scanning hardware providers, cloud systems, and environmental regulators form an interconnected ecosystem around production and lifecycle tracking.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Why is it valuable to them?</h3>
+      <p>Users get perfect fit and personalization. Manufacturers eliminate inventory risk. The system reduces waste by closing material loops, shifting apparel from a consumptive model to a regenerative one.</p>
     </div>
   </div>
 
   <div id="memory-device" class="tab-panel">
-    <img src="photos_ideas/memory_device.png" alt="Memory Device render">
     <h2>Memory Device</h2>
     <p class="tab-subheading">A device to capture and recreate a person's memory</p>
-    <div class="text-block">
-      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    <div class="speculative-section">
+      <h3>Current narrative</h3>
+      <p><span class="highlight-yellow">Memories</span> are captured as <span class="highlight-yellow">fragments</span>, <span class="highlight-yellow">photos and videos</span>, <span class="highlight-yellow">missing</span> critical elements like <span class="highlight-yellow">ambience, temperature, and smell</span>. What we store is only a partial reconstruction of the original experience.</p>
+      <img src="photos_speculative/current_memories.png" alt="Current memories">
+    </div>
+    <div class="speculative-section">
+      <h3>Possible narrative</h3>
+      <p><span class="highlight-yellow">Memories</span> are <span class="highlight-yellow">captured</span> as <span class="highlight-yellow">multisensory datasets and later reconstructed as environments</span>. Instead of viewing a moment, users re-enter it through <span class="highlight-yellow">light, sound, atmosphere, and spatial cues</span>. Memory shifts from documentation to <span class="highlight-yellow">immersion</span>.</p>
+      <img src="photos_speculative/future_memories.png" alt="Future memories">
+    </div>
+    <div class="speculative-section">
+      <h3>What space does it impact?</h3>
+      <p>It sits across experiential media, HCI, and healthcare, especially in memory-related therapy and digital archiving.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Who are the people involved?</h3>
+      <p>Individuals, families, therapists, engineers, and designers collaborate in capturing, reconstructing, and interacting with memory environments.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Why is it valuable to them?</h3>
+      <p>It enables deeper emotional recall and more meaningful preservation. In healthcare, it offers new ways to engage cognition; for individuals, it transforms memory into a lived experience rather than stored media.</p>
+      <div class="photos-side-by-side">
+        <img src="photos_speculative/head_enclosure.png" alt="Head enclosure">
+        <img src="photos_speculative/enclosed_room.png" alt="Enclosed room">
+      </div>
     </div>
   </div>
 
   <div id="moduon" class="tab-panel">
-    <img src="photos_ideas/moduon.png" alt="Modulon render">
     <h2>Modulon</h2>
     <p class="tab-subheading">Creating panels that produce energy, filter water & filter air</p>
-    <div class="text-block">
-      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    <div class="speculative-section">
+      <h3>Current narrative</h3>
+      <p>Buildings act as passive shells, relying on centralized systems for energy, water, and air. These functions are disconnected from the surfaces that define the built environment.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Possible narrative</h3>
+      <p>Surfaces become active systems. Modular units generate energy, filter air, and purify water while connecting through a shared infrastructure. Buildings evolve into distributed ecosystems that capture, transform, and redistribute resources.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>What space does it impact?</h3>
+      <p>It transforms architecture into climate infrastructure, shifting from centralized utilities to localized, adaptive systems embedded in surfaces.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Who are the people involved?</h3>
+      <p>Architects, engineers, developers, energy providers, and occupants interact through a shared system of modular resource generation.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Why is it valuable to them?</h3>
+      <p>It reduces dependency on external systems, enables scalable deployment, and turns buildings into producers rather than consumers of resources.</p>
     </div>
   </div>
 
   <div id="programmable-matter" class="tab-panel">
-    <img src="photos_ideas/programmabe_matter.png" alt="Programmable Matter render">
     <h2>Programmable Matter</h2>
-    <p class="tab-subheading">Adaptive material systems</p>
-    <div class="text-block">
-      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    <p class="tab-subheading">AI as matter</p>
+    <div class="project-meta">
+      <p><strong>Team members:</strong> Margo, Hanji Xu, Pedro Sacramento, Thomas Knoepffler</p>
+      <p><strong>Event:</strong> HARDMODE: Hardware X AI Hackathon hosted by MIT Media Lab</p>
+      <p><strong>Award:</strong> Tenstorrent Sponsorship Prize winners</p>
     </div>
-  </div>
-
-  <div id="reef-structure" class="tab-panel">
-    <img src="photos_ideas/reef_structure.webp" alt="The Reef Project render">
-    <h2>The Reef Project</h2>
-    <p class="tab-subheading">Creating a reef growth structure</p>
-    <div class="text-block">
-      <p>Add your detailed description, concept, process, and insights for this speculative design here.</p>
+    <div class="speculative-section">
+      <h3>Narrative</h3>
+      <p>Intelligence becomes something you shape. A clay-like interface responds to touch, deformation, and gesture, translating physical form into digital output. Instead of prompting AI, users sculpt it, turning interaction into a tactile, intuitive process. <a href="https://devpost.com/software/soft-mode-sculpting-intelligence-clai-clay" target="_blank" rel="noopener noreferrer">Devpost ↗</a></p>
+    </div>
+    <div class="photo-narrative">
+      <img src="photos_speculative/ClAI_1.jpg" alt="CLAI">
+      <img src="photos_speculative/mit_softmode.png" alt="MIT Soft Mode">
+    </div>
+    <div class="speculative-section">
+      <h3>What space does it impact?</h3>
+      <p>It redefines human-AI interaction, moving from screen-based interfaces to embodied, tangible systems across design, education, and creativity.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Who are the people involved?</h3>
+      <p>Designers, creators, engineers, educators, and everyday users engage with AI through physical manipulation rather than code or text.</p>
+    </div>
+    <div class="speculative-section">
+      <h3>Why is it valuable to them?</h3>
+      <p>It lowers the barrier to AI, making it intuitive and expressive. Physical interaction accelerates ideation and aligns better with how humans think, through making, not typing.</p>
+    </div>
+    <div class="photos-side-by-side">
+      <img src="photos_speculative/ClAI_2.jpg" alt="CLAI 2">
+      <img src="photos_speculative/ClAI_3.jpg" alt="CLAI 3">
     </div>
   </div>
 
@@ -237,7 +372,7 @@
     // Open tab from URL hash on load
     function openFromHash() {
       const hash = window.location.hash.slice(1);
-      const validIds = ['bespoke-apparel', 'memory-device', 'moduon', 'programmable-matter', 'reef-structure'];
+      const validIds = ['bespoke-apparel', 'memory-device', 'moduon', 'programmable-matter'];
       if (hash && validIds.includes(hash)) {
         showTab(hash);
       }
