@@ -158,12 +158,101 @@
       object-fit: cover;
       border-radius: 0;
     }
-    #horizon .three-in-row img {
+    #horizon     .three-in-row img {
       width: 32%;
       aspect-ratio: 4/3;
       object-fit: cover;
       border-radius: 0;
     }
+
+    /* Wide tab + right flow diagram (present tabs with diagram; matches ideas / MORPH) */
+    #abbstract.tab-panel,
+    #horizon.tab-panel,
+    #influx.tab-panel,
+    #reef-structure.tab-panel {
+      max-width: min(1280px, calc(100vw - 2.5rem));
+    }
+    .ideas-split {
+      display: grid;
+      grid-template-columns: minmax(0, min(850px, 100%)) 1fr;
+      gap: clamp(1.5rem, 3.5vw, 3.25rem);
+      align-items: start;
+      max-width: 100%;
+    }
+    .ideas-main {
+      min-width: 0;
+      max-width: 850px;
+    }
+    .ideas-aside {
+      align-self: start;
+      justify-self: end;
+      position: sticky;
+      top: 1rem;
+      padding-top: 0.25rem;
+      padding-right: clamp(0, 1.5vw, 0.75rem);
+    }
+    @media (max-width: 1100px) {
+      .ideas-split {
+        grid-template-columns: 1fr;
+      }
+      .ideas-main {
+        max-width: none;
+        order: 0;
+      }
+      .ideas-aside {
+        position: static;
+        order: 1;
+        justify-self: center;
+        padding-right: 0;
+        width: 100%;
+        max-width: 21rem;
+        margin: 0 auto 1.5rem;
+      }
+    }
+    .ideas-flow {
+      width: 19rem;
+      max-width: min(19rem, 92vw);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.55rem;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .ideas-flow-step {
+      background: rgba(100, 100, 110, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 6px;
+      padding: 0.7rem 0.8rem;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .ideas-flow-title {
+      margin: 0 0 0.28rem;
+      font-size: clamp(0.7rem, 1.35vw, 0.8rem);
+      font-weight: 600;
+      color: #111;
+      line-height: 1.28;
+    }
+    .ideas-flow-detail {
+      margin: 0;
+      font-size: clamp(0.62rem, 1.15vw, 0.72rem);
+      font-weight: 400;
+      color: #2a2a2a;
+      line-height: 1.45;
+    }
+    .ideas-flow-arrow {
+      flex-shrink: 0;
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1;
+      padding: 0.5rem 0;
+      color: rgb(233, 30, 140);
+      user-select: none;
+    }
+
     #reef-structure .media-container img:first-child {
       object-fit: cover;
       object-position: left center;
@@ -288,6 +377,8 @@
       <p><strong>Course:</strong> Cooperative robotics</p>
       <p><strong>Instructor:</strong> Marirena Kladeftira</p>
     </div>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="text-block">
       <p>This project frames human-robot interaction as a <span class="highlight-yellow">co-creative performance</span>. <span class="highlight-yellow">The robots collaborate with two humans in a timed painting exchange</span>, offering wooden blocks to be painted before retrieving and stacking them into a <span class="highlight-yellow">choreographed composition</span>.</p>
     </div>
@@ -313,6 +404,36 @@
         <p>The path is planned differently for both robots. The <span class="highlight-yellow">PET Bot</span> approaches from a lower angle, following soft, curved motion paths that feel <span class="highlight-yellow">intuitive and accommodating</span>, allowing users to interact with ease. In contrast, the <span class="highlight-yellow">POWER Bot</span> moves assertively from the front, tracing dominant, arched trajectories that often <span class="highlight-yellow">challenge the user's space</span> and alter the dynamics of co-creation.</p>
       </div>
     </div>
+      </div>
+      <aside class="ideas-aside" aria-label="ABBstract system flow">
+      <div class="ideas-flow" role="region" aria-label="ABBstract flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Humans (Painters)</p>
+          <p class="ideas-flow-detail">→ paint blocks</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Robots (Interaction + Movement)</p>
+          <p class="ideas-flow-detail">→ deliver, retrieve, stack</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Choreographed Logic)</p>
+          <p class="ideas-flow-detail">→ structured interaction</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ co-created artwork</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ builds familiarity with human-machine collaboration, reduces intimidation around robotics, and opens creative engagement with technology</p>
+        </div>
+      </div>
+      </aside>
+    </div>
   </div>
 
   <div id="horizon" class="tab-panel">
@@ -323,6 +444,8 @@
       <p><strong>Course:</strong> Design for Physical Interaction</p>
       <p><strong>Instructor:</strong> Daniel Leithinger and Marcelo Coleho</p>
     </div>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="text-block">
       <p>Horizon is a <span class="highlight-yellow">responsive picture frame</span> that <span class="highlight-yellow">displays the sky gradient</span> of any location the user wishes to experience. It offers a moment of telepresence, allowing users to engage in the simple act of <span class="highlight-yellow">watching the sky from anywhere in the world</span>.</p>
     </div>
@@ -352,6 +475,36 @@
         <p>Windows give a <span class="highlight-yellow">sneak peek into the transient world</span>. They frame views, skylines, and beautiful sky gradients. This project delves into creating the feeling of being in a different place (telepresence) and experiencing the ever-changing skylines of various locations.</p>
       </div>
     </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Horizon system flow">
+      <div class="ideas-flow" role="region" aria-label="Horizon flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Remote Environment (Sky Data)</p>
+          <p class="ideas-flow-detail">→ capture ambience</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Processing + Mapping)</p>
+          <p class="ideas-flow-detail">→ translate into light + sound</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Device (Frame + Audio)</p>
+          <p class="ideas-flow-detail">→ recreate environment</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ ambient telepresence</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ reduces emotional distance between places, supports wellbeing for people separated from familiar environments, and creates moments of calm and connection</p>
+        </div>
+      </div>
+      </aside>
+    </div>
   </div>
 
   <div id="influx" class="tab-panel">
@@ -362,6 +515,8 @@
       <p><strong>Course:</strong> Design Making Across Disciplines</p>
       <p><strong>Instructor:</strong> Jenny Sabin, Lawson Spencer, Laura Maria Gonzalez and Marirena Kladeftira</p>
     </div>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="text-block">
       <p>Influx is a <span class="highlight-yellow">dynamic surface</span> that choreographs the balance between light and shade. Through <span class="highlight-yellow">transformable structures and iridescent materials</span>, it <span class="highlight-yellow">playfully filters light</span>, sometimes letting it in, sometimes holding it back—creating an ever-changing interplay of color and shadow that <span class="highlight-yellow">produces vibrant, shaded space</span>.</p>
     </div>
@@ -395,6 +550,36 @@
       </div>
       <img src="photos_auxeticfacade/project2_img9.png" alt="Auxetic Facade Image 9">
     </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Influx system flow">
+      <div class="ideas-flow" role="region" aria-label="Influx flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Environment (Sunlight Conditions)</p>
+          <p class="ideas-flow-detail">→ varying light</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Auxetic Geometry)</p>
+          <p class="ideas-flow-detail">→ transform surface</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Material Response (Surface Behavior)</p>
+          <p class="ideas-flow-detail">→ filter light + shade</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ adaptive daylight and thermal control</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ improves indoor comfort without heavy energy use, reduces environmental load, and creates more livable built environments</p>
+        </div>
+      </div>
+      </aside>
+    </div>
   </div>
 
   <div id="reef-structure" class="tab-panel">
@@ -405,6 +590,8 @@
       <p><strong>Course:</strong> Transformable Design</p>
       <p><strong>Instructor:</strong> Chuck Hoberman</p>
     </div>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="text-block">
       <p>The Reef Project is a <span class="highlight-yellow">transformable reef restoration structure</span> designed for <span class="highlight-yellow">rapid</span> and effortless <span class="highlight-yellow">underwater deployment</span>. By enabling the structure to collapse for transport and expand underwater, our project addresses the <span class="highlight-yellow">limitations of current systems</span> that are <span class="highlight-yellow">difficult to transport and deploy underwater</span>.</p>
     </div>
@@ -423,6 +610,36 @@
       <div class="text-block">
         <p><span class="highlight-yellow">Reefs are vital ecosystems</span> that <span class="highlight-yellow">support marine biodiversity</span> and protect coastlines, making efficient restoration methods like ours <span class="highlight-yellow">increasingly urgent</span>.</p>
       </div>
+    </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Reef project system flow">
+      <div class="ideas-flow" role="region" aria-label="Reef project flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Deployment (Transport + Placement)</p>
+          <p class="ideas-flow-detail">→ compact delivery</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Transformable Expansion)</p>
+          <p class="ideas-flow-detail">→ deploy underwater</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Biological Interaction (Marine Growth)</p>
+          <p class="ideas-flow-detail">→ coral attachment</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ scalable reef restoration</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ protects coastal ecosystems, supports biodiversity, and sustains livelihoods dependent on marine environments</p>
+        </div>
+      </div>
+      </aside>
     </div>
   </div>
 

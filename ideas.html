@@ -198,6 +198,151 @@
       margin: 0.25rem 0;
     }
 
+    /* Wide tab + right flow diagram (ideas tabs with diagram; matches MORPH realizations) */
+    #bespoke-apparel.tab-panel,
+    #memory-device.tab-panel,
+    #moduon.tab-panel,
+    #programmable-matter.tab-panel {
+      max-width: min(1280px, calc(100vw - 2.5rem));
+    }
+    .ideas-split {
+      display: grid;
+      grid-template-columns: minmax(0, min(850px, 100%)) 1fr;
+      gap: clamp(1.5rem, 3.5vw, 3.25rem);
+      align-items: start;
+      max-width: 100%;
+    }
+    .ideas-main {
+      min-width: 0;
+      max-width: 850px;
+    }
+    .ideas-aside {
+      align-self: start;
+      justify-self: end;
+      position: sticky;
+      top: 1rem;
+      padding-top: 0.25rem;
+      padding-right: clamp(0, 1.5vw, 0.75rem);
+    }
+    @media (max-width: 1100px) {
+      .ideas-split {
+        grid-template-columns: 1fr;
+      }
+      .ideas-main {
+        max-width: none;
+        order: 0;
+      }
+      .ideas-aside {
+        position: static;
+        order: 1;
+        justify-self: center;
+        padding-right: 0;
+        width: 100%;
+        max-width: 21rem;
+        margin: 0 auto 1.5rem;
+      }
+    }
+    .ideas-flow {
+      width: 19rem;
+      max-width: min(19rem, 92vw);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.55rem;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .ideas-flow-step {
+      background: rgba(100, 100, 110, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 6px;
+      padding: 0.7rem 0.8rem;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .ideas-flow-title {
+      margin: 0 0 0.28rem;
+      font-size: clamp(0.7rem, 1.35vw, 0.8rem);
+      font-weight: 600;
+      color: #111;
+      line-height: 1.28;
+    }
+    .ideas-flow-detail {
+      margin: 0;
+      font-size: clamp(0.62rem, 1.15vw, 0.72rem);
+      font-weight: 400;
+      color: #2a2a2a;
+      line-height: 1.45;
+    }
+    .ideas-flow-arrow {
+      flex-shrink: 0;
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1;
+      padding: 0.5rem 0;
+      color: rgb(233, 30, 140);
+      user-select: none;
+    }
+
+    /* Modulon: building-blocks sketch — smaller, bottom-aligned with main column */
+    #moduon .ideas-split {
+      align-items: stretch;
+    }
+    #moduon .ideas-aside.modulon-sketch-aside {
+      align-self: stretch;
+      position: static;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      justify-self: end;
+      width: min(24rem, 100%);
+      max-width: min(24rem, 42vw);
+      min-width: 0;
+      min-height: 0;
+      padding-top: 0;
+      padding-right: clamp(0, 1.5vw, 0.75rem);
+      padding-bottom: 0.25rem;
+    }
+    #moduon .modulon-sketch-frame {
+      flex: 0 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    #moduon .modulon-sketch-img {
+      width: auto;
+      height: auto;
+      max-width: min(23rem, 98%);
+      max-height: min(60vh, 36rem);
+      object-fit: contain;
+      object-position: bottom right;
+      margin: 0;
+      display: block;
+    }
+    @media (max-width: 1100px) {
+      #moduon .ideas-aside.modulon-sketch-aside {
+        width: 100%;
+        max-width: min(24rem, 100%);
+        margin: 0 auto 1.5rem;
+        order: 1;
+        justify-content: center;
+        align-items: center;
+        padding-right: 0;
+      }
+      #moduon .moduon-sketch-frame {
+        justify-content: center;
+        align-items: center;
+      }
+      #moduon .modulon-sketch-img {
+        max-width: min(22rem, 98%);
+        max-height: min(58vh, 32rem);
+      }
+    }
+
     /* Following ball – matches index page dot */
     .follow-ball {
       position: fixed;
@@ -230,6 +375,8 @@
   <div id="bespoke-apparel" class="tab-panel active">
     <h2>Bespoke Apparel</h2>
     <p class="tab-subheading">Exploring closed loop systems for apparel</p>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="speculative-section">
       <h3>Current narrative</h3>
       <p>Clothing today is selected from pre-defined options. Users browse, choose from <span class="highlight-yellow">standardized sizes</span>, and <span class="highlight-yellow">accumulate garments over time</span>, often with poor fit and redundancy. This <span class="highlight-yellow">linear system</span> disconnects the body from production, resulting in <span class="highlight-yellow">excess inventory and waste</span>.</p>
@@ -252,11 +399,43 @@
       <h3>Why is it valuable to them?</h3>
       <p>Users get perfect fit and personalization. Manufacturers eliminate inventory risk. The system reduces waste by closing material loops, shifting apparel from a consumptive model to a regenerative one.</p>
     </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Bespoke apparel system flow">
+      <div class="ideas-flow" role="region" aria-label="Bespoke apparel flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">User (Body as Input)</p>
+          <p class="ideas-flow-detail">→ scan + preference input</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Design + Fabrication)</p>
+          <p class="ideas-flow-detail">→ morphable mannequin + spray-based production</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Infrastructure (Localized Production)</p>
+          <p class="ideas-flow-detail">→ micro-factories + material recovery</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ zero inventory + perfect fit + circular apparel system</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ minimizes textile waste, reduces overproduction, and creates localized, skill-based manufacturing opportunities closer to communities</p>
+        </div>
+      </div>
+      </aside>
+    </div>
   </div>
 
   <div id="memory-device" class="tab-panel">
     <h2>Memory Device</h2>
     <p class="tab-subheading">A device to capture and recreate a person's memory</p>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="speculative-section">
       <h3>Current narrative</h3>
       <p><span class="highlight-yellow">Memories</span> are captured as <span class="highlight-yellow">fragments</span>, <span class="highlight-yellow">photos and videos</span>, <span class="highlight-yellow">missing</span> critical elements like <span class="highlight-yellow">ambience, temperature, and smell</span>. What we store is only a partial reconstruction of the original experience.</p>
@@ -283,30 +462,79 @@
         <img src="photos_speculative/enclosed_room.png" alt="Enclosed room">
       </div>
     </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Memory device system flow">
+      <div class="ideas-flow" role="region" aria-label="Memory device flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">User Experience (Moment in Time)</p>
+          <p class="ideas-flow-detail">→ multisensory capture</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Data Encoding + Storage)</p>
+          <p class="ideas-flow-detail">→ structured sensory dataset</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Interface (Reconstruction Environment)</p>
+          <p class="ideas-flow-detail">→ immersive playback</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ deeper recall + emotional engagement</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ strengthens human connection, supports memory care and emotional wellbeing, and redefines how experiences are preserved and shared across generations</p>
+        </div>
+      </div>
+      </aside>
+    </div>
   </div>
 
   <div id="moduon" class="tab-panel">
     <h2>Modulon</h2>
     <p class="tab-subheading">Creating panels that produce energy, filter water & filter air</p>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="speculative-section">
       <h3>Current narrative</h3>
       <p>Buildings act as passive shells, relying on centralized systems for energy, water, and air. These functions are disconnected from the surfaces that define the built environment.</p>
     </div>
+    <img src="photos_speculative/systems diagram.jpg" alt="Modulon — systems diagram">
     <div class="speculative-section">
       <h3>Possible narrative</h3>
-      <p>Surfaces become active systems. Modular units generate energy, filter air, and purify water while connecting through a shared infrastructure. Buildings evolve into distributed ecosystems that capture, transform, and redistribute resources.</p>
+      <p>Surfaces become active systems. Modular units generate energy, filter air, and purify water while connecting through a shared infrastructure. Buildings evolve into distributed ecosystems that capture, transform, and redistribute resources, enabling communities to access essential resources locally rather than depending on distant, centralized systems.</p>
+    </div>
+    <div class="photos-side-by-side">
+      <img src="photos_speculative/solar modulon.jpg" alt="Modulon — solar module">
+      <img src="photos_speculative/wind modulon.jpg" alt="Modulon — wind module">
+    </div>
+    <div class="photos-side-by-side">
+      <img src="photos_speculative/water modulon.jpg" alt="Modulon — water module">
+      <img src="photos_speculative/air filtration.jpg" alt="Modulon — air filtration">
     </div>
     <div class="speculative-section">
       <h3>What space does it impact?</h3>
-      <p>It transforms architecture into climate infrastructure, shifting from centralized utilities to localized, adaptive systems embedded in surfaces.</p>
+      <p>It transforms architecture into climate infrastructure, shifting from centralized utilities to localized, adaptive systems embedded in surfaces, with implications for how settlements are planned, built, and sustained.</p>
     </div>
+    <img src="photos_speculative/connectors.jpg" alt="Modulon — modular connectors">
     <div class="speculative-section">
       <h3>Who are the people involved?</h3>
-      <p>Architects, engineers, developers, energy providers, and occupants interact through a shared system of modular resource generation.</p>
+      <p>Architects, engineers, developers, energy providers, and occupants interact through a shared system of modular resource generation, while communities benefit from increased access to essential resources and greater control over their environment.</p>
     </div>
     <div class="speculative-section">
       <h3>Why is it valuable to them?</h3>
-      <p>It reduces dependency on external systems, enables scalable deployment, and turns buildings into producers rather than consumers of resources.</p>
+      <p>It reduces dependency on external systems, enables scalable deployment, and turns buildings into producers rather than consumers of resources, while also allowing communities to build self-sustaining environments, improve resilience in resource-constrained contexts, and lower long-term costs associated with energy, water, and air infrastructure.</p>
+    </div>
+      </div>
+      <aside class="ideas-aside modulon-sketch-aside" aria-label="Modulon building blocks sketch">
+        <div class="modulon-sketch-frame">
+          <img class="modulon-sketch-img" src="photos_speculative/buildingblocks_sketch.png" alt="Modulon — building blocks sketch">
+        </div>
+      </aside>
     </div>
   </div>
 
@@ -318,6 +546,8 @@
       <p><strong>Event:</strong> HARDMODE: Hardware X AI Hackathon hosted by MIT Media Lab</p>
       <p><strong>Award:</strong> Tenstorrent Sponsorship Prize winners</p>
     </div>
+    <div class="ideas-split">
+      <div class="ideas-main">
     <div class="speculative-section">
       <h3>Narrative</h3>
       <p>Intelligence becomes something you shape. A clay-like interface responds to touch, deformation, and gesture, translating physical form into digital output. Instead of prompting AI, users sculpt it, turning interaction into a tactile, intuitive process. <a href="https://devpost.com/software/soft-mode-sculpting-intelligence-clai-clay" target="_blank" rel="noopener noreferrer">Devpost ↗</a></p>
@@ -341,6 +571,36 @@
     <div class="photos-side-by-side">
       <img src="photos_speculative/ClAI_2.jpg" alt="CLAI 2">
       <img src="photos_speculative/ClAI_3.jpg" alt="CLAI 3">
+    </div>
+      </div>
+      <aside class="ideas-aside" aria-label="Programmable Matter system flow">
+      <div class="ideas-flow" role="region" aria-label="Programmable Matter flow diagram">
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">User (Physical Interaction)</p>
+          <p class="ideas-flow-detail">→ gesture + deformation</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">System (Sensing + AI Translation)</p>
+          <p class="ideas-flow-detail">→ interpret → generate</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Output (Digital Media)</p>
+          <p class="ideas-flow-detail">→ image / sound / video</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Outcome</p>
+          <p class="ideas-flow-detail">→ intuitive interaction with AI</p>
+        </div>
+        <div class="ideas-flow-arrow" aria-hidden="true">↓</div>
+        <div class="ideas-flow-step">
+          <p class="ideas-flow-title">Community Impact</p>
+          <p class="ideas-flow-detail">→ makes advanced technology accessible without technical literacy, enabling broader participation in creativity, design, and digital production</p>
+        </div>
+      </div>
+      </aside>
     </div>
   </div>
 
