@@ -28,7 +28,7 @@
       cursor: none;
     }
 
-    /* Intro overlay: two horizontal strips that slide to vertical bars on first scroll */
+    /* Intro overlay: two full-viewport strips until first scroll, then hidden */
     .intro-overlay {
       position: fixed;
       top: 0;
@@ -43,18 +43,11 @@
     .intro-overlay.scrolled {
       pointer-events: none;
     }
+    /* Hide intro strips after dismiss — no narrow pink/yellow bars on the right */
     .intro-overlay.scrolled .intro-strip {
-      pointer-events: auto;
-    }
-    /* Hide narrow pink/yellow bars on right; keep name & vision visible when photo in view */
-    .intro-overlay.scrolled:not(.strips-extended) .intro-strip {
       visibility: hidden;
       opacity: 0;
-    }
-    .intro-overlay.scrolled.strips-extended .intro-strip {
-      visibility: visible;
-      opacity: 1;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), width 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      pointer-events: none;
     }
     .intro-strip {
       position: absolute;
@@ -79,101 +72,6 @@
       top: 50vh;
       background: rgba(251, 247, 25, 0.94);
       color: black;
-    }
-    .intro-overlay.scrolled:not(.strips-extended) .intro-strip {
-      transition: none;
-    }
-    .intro-overlay.scrolled .intro-strip-top {
-      width: 48px;
-      height: 50vh;
-      top: 0;
-      transform: translateX(calc(100vw - 48px));
-      background: rgba(233, 30, 140, 0.95);
-      box-sizing: border-box;
-      z-index: 2;
-    }
-    .intro-overlay.scrolled .intro-strip-bottom {
-      width: 48px;
-      transform: translateX(calc(100vw - 48px));
-      z-index: 1;
-    }
-    /* When photo section is in view: strips align with photo top/bottom, beside photo (no overlap) */
-    .intro-overlay.scrolled.strips-extended .intro-strip-top {
-      width: 62vw;
-      transform: translateX(38vw);
-      top: var(--photo-top, 0);
-      height: calc(var(--photo-height, 85vh) / 2);
-      background: transparent;
-    }
-    .intro-strip-name {
-      display: none;
-      pointer-events: none;
-    }
-    .intro-overlay.scrolled.strips-extended .intro-strip-top .intro-strip-name {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      padding: 1.5rem 2.5rem;
-      box-sizing: border-box;
-      align-items: flex-start;
-      justify-content: center;
-      font-family: 'Roboto Mono', monospace;
-      font-size: clamp(1.85rem, 4.5vw, 2.85rem);
-      font-weight: 400;
-      color: transparent;
-      -webkit-text-stroke: 2px rgb(233, 30, 140);
-      text-align: left;
-      animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    .intro-strip-name-line {
-      display: block;
-    }
-    .intro-overlay.scrolled.strips-extended .intro-strip-top .intro-strip-name-title {
-      font-size: clamp(2.25rem, 5.5vw, 3.5rem);
-    }
-    .intro-overlay.scrolled.strips-extended .intro-strip-bottom {
-      width: 62vw;
-      transform: translateX(38vw);
-      top: calc(var(--photo-top, 0) + var(--photo-height, 85vh) / 2);
-      height: calc(var(--photo-height, 85vh) / 2);
-    }
-    .intro-strip-tagline {
-      display: none;
-      pointer-events: none;
-    }
-    .intro-overlay.scrolled.strips-extended .intro-strip-bottom .intro-strip-tagline {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      padding: 1.5rem 2.5rem;
-      box-sizing: border-box;
-      font-family: 'Roboto Mono', monospace;
-      font-size: clamp(1.85rem, 4.5vw, 2.85rem);
-      font-weight: 700;
-      line-height: 1.35;
-      color: #1a1a1a;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
-    }
-    @keyframes slideInFromLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
     }
     .intro-strip-text {
       font-family: 'Roboto Mono', monospace;
@@ -216,6 +114,88 @@
     :root {
       --section-gap: 5rem;
       --page-margin: 2rem;
+      --section-nav-height: 3.25rem;
+    }
+
+    /* Sticky section jump bar (visible while scrolling main content) */
+    .section-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      min-height: var(--section-nav-height);
+      padding: 0.5rem 0;
+      box-sizing: border-box;
+      background: rgba(232, 232, 235, 0.94);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    }
+    .section-nav a {
+      flex: 1;
+      text-align: center;
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(0.82rem, 2.35vw, 1rem);
+      font-weight: 500;
+      color: #1a1a1a;
+      text-decoration: none;
+      padding: 0.35em 0.35em;
+      border-radius: 2px;
+      transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .section-nav a:hover {
+      color: #111;
+      background: rgb(251, 247, 25);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    #section-hero,
+    #realizations,
+    #realizations-gallery,
+    #speculative-futures,
+    #present-realities,
+    #projects-gallery {
+      scroll-margin-top: calc(var(--section-nav-height) + 1rem);
+    }
+    /* Tighter top offset so About (tall block) doesn’t land with a huge gap under the nav */
+    #about,
+    #photo-section {
+      scroll-margin-top: calc(var(--section-nav-height) + 0.35rem);
+    }
+
+    /* Next-section control: bottom-right circular button (above intro overlay) */
+    .scroll-step-down {
+      position: fixed;
+      right: 1.15rem;
+      bottom: 1.15rem;
+      z-index: 1001;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(233, 30, 140, 0.2);
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .scroll-step-down:hover {
+      transform: translateY(2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(233, 30, 140, 0.35);
+      background: rgba(251, 247, 25, 0.55);
+    }
+    .scroll-step-down svg {
+      display: block;
+      width: 1.15rem;
+      height: 1.15rem;
     }
     .main-content {
       width: 100%;
@@ -246,6 +226,10 @@
       margin: 0;
       max-width: 100%;
       letter-spacing: 0.02em;
+    }
+    #quote {
+      scroll-margin-top: calc(var(--section-nav-height) + 1rem);
+      scroll-margin-bottom: 2rem;
     }
 
     .intro-section .hero-quote .quote-end {
@@ -299,37 +283,144 @@
       max-width: 36rem;
     }
 
-    /* About section: heading on top of photo section */
+    /* About section: full-width heading; gap to photo below */
     .about-section-wrap {
+      margin-top: calc(var(--section-gap) + 1.5rem);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .about-section-wrap .intro-about-heading {
+      margin: 0 0 0.35rem;
+      padding: 0 var(--page-margin);
+    }
+
+    /* Photo section: filler on left; right column matches image height */
+    .photo-section {
+      width: 100%;
+      margin-top: 0;
+      position: relative;
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
+    }
+    .photo-section-inner {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      min-height: min(90vh, 880px);
+      gap: 0;
+    }
+    .photo-filler {
+      width: 50%;
+      flex: 1 1 50%;
+      min-height: min(80vh, 760px);
+      max-height: 88vh;
+      margin-top: 0.65rem;
+      background: url('rajvi_photo.jpeg') no-repeat 10% top;
+      background-size: contain;
+    }
+    /* About copy: lives in document flow beside the photo (no overlay slide-in) */
+    .about-photo-copy {
+      width: 50%;
+      flex: 1 1 50%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1rem;
+      box-sizing: border-box;
+      padding-left: 0;
+      margin-left: -14rem;
+    }
+    .about-photo-name-block {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      justify-content: flex-start;
+      padding: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+    }
+    .about-photo-name-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(2.4rem, 5.75vw, 3.65rem);
+      font-weight: 400;
+      color: transparent;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+    .about-photo-name-line {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.05rem, 2.3vw, 1.32rem);
+      font-weight: 500;
+      color: rgb(233, 30, 140);
+      line-height: 1.35;
+      margin-top: 0.15rem;
+    }
+    .about-bio {
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      min-width: 0;
+      max-width: 100%;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .about-bio p {
+      margin: 0;
+      font-family: inherit;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .about-bio a {
+      color: rgb(233, 30, 140);
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+    .about-bio a:hover {
+      color: #c4186a;
+    }
+    .about-bio-thick {
+      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      font-weight: 700;
+      color: #111;
+    }
+    .about-bio-thin {
+      font-size: clamp(0.9rem, 1.92vw, 1.04rem);
+      font-weight: 400;
+      color: #2a2a2a;
+    }
+    .about-bio-thick.about-bio-closing {
+      font-size: clamp(1.26rem, 2.75vw, 1.5rem);
+    }
+    .about-bio p.about-bio-focus-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.1rem, 2.4vw, 1.32rem);
+      font-weight: 600;
+      color: #111;
+      margin: 0.35rem 0 0;
+    }
+    /* Realizations: heading + full-bleed gallery (same rhythm as Speculative futures) */
+    .realizations-wrap {
       margin-top: var(--section-gap);
       scroll-snap-align: center;
       scroll-snap-stop: always;
     }
-    .about-section-wrap .intro-about-heading {
+    .realizations-heading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: transparent;
       margin: 0 0 1rem;
-    }
-
-    /* Photo section: filler on left; right half is where bars extend into */
-    .photo-section {
-      height: 100vh;
-      min-height: 100vh;
-      width: 100%;
-      margin-top: 0;
-      position: relative;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-    }
-    .photo-section-inner {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-    }
-    .photo-filler {
-      width: 50%;
-      min-height: 100vh;
-      background: url('rajvi_photo.jpeg') no-repeat 10% center;
-      background-size: contain;
+      padding: 0 var(--page-margin);
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+      display: inline-block;
     }
 
     /* Speculative futures section heading */
@@ -352,7 +443,8 @@
 
     /* Renders gallery & Projects gallery – full-width, cover crop, same slide format */
     .renders-gallery,
-    .projects-gallery {
+    .projects-gallery,
+    .realizations-gallery {
       margin-top: 0;
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
@@ -363,7 +455,8 @@
       overflow: hidden;
     }
     .renders-gallery-slide,
-    .projects-gallery-slide {
+    .projects-gallery-slide,
+    .realizations-gallery-slide {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
@@ -378,13 +471,15 @@
       transition: opacity 0.4s ease;
     }
     .renders-gallery-slide.active,
-    .projects-gallery-slide.active {
+    .projects-gallery-slide.active,
+    .realizations-gallery-slide.active {
       opacity: 1;
       pointer-events: auto;
       position: relative;
     }
     .renders-gallery-slide a,
-    .projects-gallery-slide a {
+    .projects-gallery-slide a,
+    .realizations-gallery-slide a {
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -394,7 +489,8 @@
       position: relative;
     }
     .renders-gallery-slide .renders-gallery-bg,
-    .projects-gallery-slide .renders-gallery-bg {
+    .projects-gallery-slide .renders-gallery-bg,
+    .realizations-gallery-slide .renders-gallery-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
@@ -404,7 +500,8 @@
       z-index: 0;
     }
     .renders-gallery-slide .renders-gallery-bg::after,
-    .projects-gallery-slide .renders-gallery-bg::after {
+    .projects-gallery-slide .renders-gallery-bg::after,
+    .realizations-gallery-slide .renders-gallery-bg::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -412,7 +509,8 @@
       pointer-events: none;
     }
     .renders-gallery-slide .renders-gallery-color,
-    .projects-gallery-slide .renders-gallery-color {
+    .projects-gallery-slide .renders-gallery-color,
+    .realizations-gallery-slide .renders-gallery-color {
       position: absolute;
       inset: 0;
       background-size: cover;
@@ -427,7 +525,8 @@
       transition: opacity 0.2s ease;
     }
     .renders-gallery.cursor-over .renders-gallery-slide.active .renders-gallery-color,
-    .projects-gallery.cursor-over .projects-gallery-slide.active .renders-gallery-color {
+    .projects-gallery.cursor-over .projects-gallery-slide.active .renders-gallery-color,
+    .realizations-gallery.cursor-over .realizations-gallery-slide.active .renders-gallery-color {
       opacity: 1;
     }
     .renders-gallery-caption,
@@ -437,6 +536,11 @@
       left: 7rem;
       transform: translateY(-50%);
       z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      max-width: min(92vw, 34rem);
     }
     .renders-gallery-heading,
     .projects-gallery-heading {
@@ -444,12 +548,14 @@
       font-size: clamp(2.15rem, 5.5vw, 3.75rem);
       font-weight: 400;
       color: #111;
-      background: linear-gradient(to bottom, transparent 14%, rgb(251, 247, 25) 14%, rgb(251, 247, 25) 86%, transparent 86%);
-      padding: 0.1em 0.2em;
+      background: linear-gradient(to bottom, transparent 4%, rgb(251, 247, 25) 4%, rgb(251, 247, 25) 96%, transparent 96%);
+      padding: 0.06em 0.28em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
-      display: block;
+      display: inline-block;
+      max-width: 100%;
       margin: 0;
+      box-sizing: border-box;
     }
     .renders-gallery-subheading,
     .projects-gallery-subheading {
@@ -457,16 +563,78 @@
       font-size: clamp(1.05rem, 2.3vw, 1.3rem);
       font-weight: 400;
       color: #111;
-      background: linear-gradient(to bottom, transparent 14%, rgb(251, 247, 25) 14%, rgb(251, 247, 25) 86%, transparent 86%);
-      padding: 0.1em 0.2em;
+      background: linear-gradient(to bottom, transparent 4%, rgb(251, 247, 25) 4%, rgb(251, 247, 25) 96%, transparent 96%);
+      padding: 0.06em 0.28em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
-      margin: 0.15em 0 0;
-      padding-left: 0.2em;
+      margin: 0;
       display: inline-block;
+      max-width: 100%;
+      box-sizing: border-box;
     }
+    /* Speculative + Present: caption clears prev/next arrows (~2rem inset + ~4rem SVG + gap) */
+    #renders-gallery .renders-gallery-caption,
+    #projects-gallery .renders-gallery-caption {
+      left: clamp(6.75rem, 4rem + 6vw, 9rem);
+      right: clamp(6.75rem, 4rem + 6vw, 9rem);
+      max-width: none;
+      width: auto;
+      overflow: visible;
+    }
+    #renders-gallery .renders-gallery-caption .renders-gallery-heading,
+    #renders-gallery .renders-gallery-caption .renders-gallery-subheading {
+      white-space: nowrap;
+      width: max-content;
+      max-width: min(100%, 85vw);
+      flex-shrink: 0;
+    }
+    #renders-gallery .renders-gallery-caption .renders-gallery-heading {
+      font-size: clamp(1.2rem, 3.2vw + 0.35rem, 3.65rem);
+    }
+    #renders-gallery .renders-gallery-caption .renders-gallery-subheading {
+      font-size: clamp(0.72rem, 1.65vw + 0.35rem, 1.28rem);
+    }
+    /* Realizations (MORPH): full width for caption; subheading one line (closed-loop tagline) */
+    #realizations-gallery .renders-gallery-caption {
+      left: clamp(1.25rem, 5vw, 7rem);
+      right: clamp(1.25rem, 5vw, 7rem);
+      max-width: none;
+      width: auto;
+      overflow: visible;
+    }
+    #realizations-gallery .renders-gallery-caption .renders-gallery-heading {
+      width: fit-content;
+      max-width: 100%;
+      min-width: 0;
+    }
+    #realizations-gallery .renders-gallery-caption .renders-gallery-subheading {
+      white-space: nowrap;
+      width: max-content;
+      max-width: none;
+      flex-shrink: 0;
+      font-size: clamp(0.62rem, 1.45vw + 0.42rem, 1.25rem);
+    }
+    #projects-gallery .renders-gallery-caption .renders-gallery-heading,
+    #projects-gallery .renders-gallery-caption .renders-gallery-subheading {
+      white-space: nowrap;
+      width: max-content;
+      max-width: min(100%, 85vw);
+      flex-shrink: 0;
+    }
+    #projects-gallery .renders-gallery-caption .renders-gallery-heading {
+      font-size: clamp(1.2rem, 3.2vw + 0.35rem, 3.65rem);
+    }
+    #projects-gallery .renders-gallery-caption .renders-gallery-subheading {
+      font-size: clamp(0.72rem, 1.65vw + 0.35rem, 1.28rem);
+    }
+    .realizations-gallery.single-slide .realizations-gallery-arrow,
+    .realizations-gallery.single-slide .realizations-gallery-dots {
+      display: none;
+    }
+
     .renders-gallery-arrow,
-    .projects-gallery-arrow {
+    .projects-gallery-arrow,
+    .realizations-gallery-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -481,22 +649,37 @@
       justify-content: center;
     }
     .renders-gallery-arrow:hover,
-    .projects-gallery-arrow:hover {
+    .projects-gallery-arrow:hover,
+    .realizations-gallery-arrow:hover {
       transform: translateY(-50%) scale(1.15);
+    }
+    .renders-gallery-arrow svg path,
+    .projects-gallery-arrow svg path,
+    .realizations-gallery-arrow svg path {
+      fill: transparent;
+      transition: fill 0.2s ease;
+    }
+    .renders-gallery-arrow:hover svg path,
+    .projects-gallery-arrow:hover svg path,
+    .realizations-gallery-arrow:hover svg path {
+      fill: rgb(233, 30, 140);
     }
     .renders-gallery-arrow svg {
       display: block;
     }
     .renders-gallery-arrow.prev,
-    .projects-gallery-arrow.prev {
+    .projects-gallery-arrow.prev,
+    .realizations-gallery-arrow.prev {
       left: 2rem;
     }
     .renders-gallery-arrow.next,
-    .projects-gallery-arrow.next {
+    .projects-gallery-arrow.next,
+    .realizations-gallery-arrow.next {
       right: 2rem;
     }
     .renders-gallery-dots,
-    .projects-gallery-dots {
+    .projects-gallery-dots,
+    .realizations-gallery-dots {
       position: absolute;
       bottom: 1.5rem;
       left: 50%;
@@ -508,7 +691,8 @@
       z-index: 10;
     }
     .renders-gallery-dot,
-    .projects-gallery-dot {
+    .projects-gallery-dot,
+    .realizations-gallery-dot {
       width: 0;
       height: 0;
       border-style: solid;
@@ -520,7 +704,8 @@
       transition: border-color 0.2s ease;
     }
     .renders-gallery-dot.active,
-    .projects-gallery-dot.active {
+    .projects-gallery-dot.active,
+    .realizations-gallery-dot.active {
       border-color: transparent transparent rgb(233, 30, 140) transparent;
     }
 
@@ -540,6 +725,7 @@
       background: none;
       -webkit-text-stroke: 2px rgb(233, 30, 140);
       paint-order: stroke fill;
+      display: block;
     }
     .projects-gallery {
       margin-top: 0;
@@ -655,7 +841,8 @@
       transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .follow-ball.over-renders-gallery,
-    .follow-ball.over-projects-gallery {
+    .follow-ball.over-projects-gallery,
+    .follow-ball.over-realizations-gallery {
       width: 140px;
       height: 140px;
       background: transparent;
@@ -697,6 +884,24 @@
         --section-gap: 3rem;
         --page-margin: 1rem;
       }
+      .photo-section-inner {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .photo-filler {
+        width: 100%;
+        max-height: none;
+        min-height: 48vh;
+        flex: none;
+      }
+      .about-photo-copy {
+        width: 100%;
+        min-height: auto;
+        flex: none;
+        margin-left: 0;
+        padding-left: var(--page-margin);
+        gap: 0.75rem;
+      }
     }
   </style>
 </head>
@@ -706,56 +911,86 @@
   <div class="intro-overlay" id="introOverlay">
     <a href="#photo-section" class="intro-strip intro-strip-top" aria-label="Go to photo section">
       <span class="intro-strip-text">speculative futures</span>
-      <span class="intro-strip-name">
-        <span class="intro-strip-name-line intro-strip-name-title">Rajvi Ranjit Patil</span>
-        <span class="intro-strip-name-line">Design Technologist</span>
-        <span class="intro-strip-name-line">Entrepreneur</span>
-        <span class="intro-strip-name-line">Architect</span>
-      </span>
     </a>
     <a href="#photo-section" class="intro-strip intro-strip-bottom" aria-label="Go to photo section">
       <span class="intro-strip-text">radical prototypes</span>
-      <span class="intro-strip-tagline">Inventing and innovating systems that enable sustainable and emerging futures.</span>
     </a>
   </div>
 
   <!-- Following ball -->
   <div class="follow-ball" id="followBall"></div>
 
+  <button type="button" class="scroll-step-down" id="scrollStepDown" aria-label="Go to next section" title="Next section">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" stroke="rgb(233, 30, 140)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
   <!-- Main content (revealed after first scroll) -->
   <div class="main-content-wrap">
+  <nav class="section-nav" aria-label="Jump to section">
+    <a href="#realizations">Realizations</a>
+    <a href="#speculative-futures">Speculative Futures</a>
+    <a href="#projects-gallery">Present realities</a>
+  </nav>
   <div class="main-content">
     <!-- Full-page comic hero -->
-    <div class="intro-section">
+    <div class="intro-section" id="section-hero">
       <blockquote class="hero-quote" id="quote">"You never <span class="marker">change</span> things by fighting the <span class="marker">existing</span> reality. To <span class="marker">change</span> something, <span class="marker">build</span> a <span class="marker">new model</span> that <span class="marker">makes</span> the <span class="marker">existing</span> model <span class="quote-end"><span class="marker">obsolete</span>."<span class="attribution">— Buckminster Fuller</span></span></blockquote>
     </div>
 
     <!-- About section: heading + photo -->
-    <div class="about-section-wrap">
+    <div class="about-section-wrap" id="about">
       <h1 class="intro-about-heading">About</h1>
-    <!-- Photo section: filler on left; pink/yellow bars extend from right when in view -->
+    <!-- Photo section: image left; name & tagline fixed in layout on the right -->
     <section id="photo-section" class="photo-section">
       <div class="photo-section-inner">
         <div class="photo-filler"></div>
+        <div class="about-photo-copy">
+          <div class="about-photo-name-block">
+            <span class="about-photo-name-title">Rajvi Ranjit Patil</span>
+            <span class="about-photo-name-line">Design Technologist · Entrepreneur · Architect</span>
+          </div>
+          <div class="about-bio">
+            <p class="about-bio-thin">Originally from <a href="https://www.britannica.com/place/Sangli" target="_blank" rel="noopener noreferrer">Sangli</a>, Maharashtra, India, I trained as an architect and began my journey in the real estate sector in Pune with <a href="https://www.redeveloper.co/" target="_blank" rel="noopener noreferrer">Ranjit Estates &amp; Developers</a>.</p>
+            <p class="about-bio-thin">Currently pursuing graduate studies in <a href="https://designtech.cornell.edu/design-tech/" target="_blank" rel="noopener noreferrer">Design Technology</a> at Cornell University and based in New York City, my work explores the intersection of design, technology, and systems thinking, with a focus on translating ideas into tangible systems and prototypes.</p>
+            <p class="about-bio-thin">Driven by the ambition to build and scale ideas, I am particularly interested in creating solutions that can operate across diverse contexts and geographies, addressing real-world challenges through integrated design and technological approaches.</p>
+            <p class="about-bio-focus-label">Focus</p>
+            <p class="about-bio-thick about-bio-closing">Inventing and innovating systems that enable sustainable and emerging futures.</p>
+          </div>
+        </div>
       </div>
     </section>
     </div>
 
+    <!-- Realizations: full-bleed showcase (like Speculative / Present) -->
+    <div class="realizations-wrap" id="realizations">
+      <h2 class="realizations-heading">Realizations</h2>
+      <section class="renders-gallery realizations-gallery single-slide" id="realizations-gallery" aria-label="Realizations showcase">
+        <button class="realizations-gallery-arrow prev" aria-label="Previous" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M58 4 L58 92 L6 48 Z"/></svg></button>
+        <button class="realizations-gallery-arrow next" aria-label="Next" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M6 4 L6 92 L58 48 Z"/></svg></button>
+        <div class="realizations-gallery-slide active" data-index="0">
+          <a href="realizations.html#morph"><span class="renders-gallery-bg" style="background-image: url('photos_realizations/morph.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_realizations/morph.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">MORPH</span><span class="renders-gallery-subheading">Startup · Closed-loop, personalized footwear system</span></div></a>
+        </div>
+        <div class="realizations-gallery-dots" aria-hidden="true"></div>
+      </section>
+    </div>
+
     <!-- Speculative futures: heading + renders gallery -->
-    <div class="speculative-futures-wrap">
+    <div class="speculative-futures-wrap" id="speculative-futures">
       <h2 class="speculative-futures-heading">Speculative futures</h2>
     <!-- Renders gallery: full-page images with prev/next arrows, clickable to detail page -->
     <section class="renders-gallery" id="renders-gallery">
       <button class="renders-gallery-arrow prev" aria-label="Previous image" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M58 4 L58 92 L6 48 Z"/></svg></button>
       <button class="renders-gallery-arrow next" aria-label="Next image" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M6 4 L6 92 L58 48 Z"/></svg></button>
       <div class="renders-gallery-slide active" data-index="0">
-        <a href="ideas.html#bespoke-apparel"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/bespoke_apparel.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/bespoke_apparel.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Bespoke Apparel</span><span class="renders-gallery-subheading">A new method for purchasing and wearing clothes</span></div></a>
+        <a href="ideas.html#bespoke-apparel"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/bespoke_apparel.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/bespoke_apparel.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Bespoke Apparel</span><span class="renders-gallery-subheading">Exploring closed loop systems for apparel</span></div></a>
       </div>
       <div class="renders-gallery-slide" data-index="1">
-        <a href="ideas.html#memory-device"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/memory_device.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/memory_device.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Memory Device</span><span class="renders-gallery-subheading">A device to capture and recreate a person's memory</span></div></a>
+        <a href="ideas.html#moduon"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/moduon.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/moduon.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Modulon</span><span class="renders-gallery-subheading">Creating panels that produce energy, filter water & filter air</span></div></a>
       </div>
       <div class="renders-gallery-slide" data-index="2">
-        <a href="ideas.html#moduon"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/moduon.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/moduon.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Modulon</span><span class="renders-gallery-subheading">Creating panels that produce energy, filter water & filter air</span></div></a>
+        <a href="ideas.html#memory-device"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/memory_device.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/memory_device.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Memory Device</span><span class="renders-gallery-subheading">A device to capture and recreate a person's memory</span></div></a>
       </div>
       <div class="renders-gallery-slide" data-index="3">
         <a href="ideas.html#programmable-matter"><span class="renders-gallery-bg" style="background-image: url('photos_ideas/programmabe_matter.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_ideas/programmabe_matter.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">Programmable Matter</span><span class="renders-gallery-subheading">Adaptive material systems</span></div></a>
@@ -765,7 +1000,7 @@
     </div>
 
     <!-- Radical prototypes: projects gallery with same slide format -->
-    <div class="projects-gallery-wrap">
+    <div class="projects-gallery-wrap" id="present-realities">
       <h2 class="projects-gallery-heading">Present realities</h2>
       <section class="projects-gallery" id="projects-gallery">
         <button class="projects-gallery-arrow prev" aria-label="Previous image" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M58 4 L58 92 L6 48 Z"/></svg></button>
@@ -790,6 +1025,30 @@
   </div>
 
   <script>
+    // Scroll so the hero quote is fully visible below the sticky nav (used after intro + when jumping to top)
+    (function() {
+      window.scrollQuoteIntoView = function() {
+        var q = document.getElementById('quote');
+        if (!q) return;
+        var nav = document.querySelector('.section-nav');
+        var navH = nav ? nav.offsetHeight : 52;
+        var pad = 14;
+        var vh = window.innerHeight;
+        var rect = q.getBoundingClientRect();
+        var elTop = window.scrollY + rect.top;
+        var elBottom = window.scrollY + rect.bottom;
+        var yTop = elTop - navH - pad;
+        var yBottom = elBottom - vh + pad;
+        var y;
+        if (yBottom > yTop) {
+          y = Math.max(0, yTop);
+        } else {
+          y = Math.max(0, (yTop + yBottom) / 2);
+        }
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      };
+    })();
+
     // Intro: scroll down to reveal quote; scroll up at top to show cover again
     (function() {
       const overlay = document.getElementById('introOverlay');
@@ -805,8 +1064,11 @@
         coverVisible = false;
         overlay.classList.add('scrolled');
         body.classList.remove('intro-active');
-        window.scrollTo(0, 0);
-        requestAnimationFrame(function() { window.scrollTo(0, 0); });
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            if (typeof window.scrollQuoteIntoView === 'function') window.scrollQuoteIntoView();
+          });
+        });
       }
       function onWheel(e) {
         if (coverVisible && e.deltaY > 0) {
@@ -817,7 +1079,8 @@
           showCover();
         }
       }
-      function onTouchStart() {
+      function onTouchStart(e) {
+        if (e.target && e.target.closest && e.target.closest('#scrollStepDown')) return;
         if (!coverVisible && window.scrollY <= 8) {
           setTimeout(function() {
             if (window.scrollY <= 8) showCover();
@@ -847,50 +1110,67 @@
           if (gallery) gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
       }
+      if (window.location.hash === '#realizations-gallery') {
+        hideCover();
+        requestAnimationFrame(function() {
+          const gallery = document.getElementById('realizations-gallery');
+          if (gallery) gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
+      // Deep links to Realizations or Speculative futures block
+      if (window.location.hash === '#realizations' || window.location.hash === '#speculative-futures') {
+        hideCover();
+        requestAnimationFrame(function() {
+          const el = document.getElementById(window.location.hash.slice(1));
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
+
+      window.hideIntroCover = hideCover;
     })();
 
-    // Extend pink/yellow only when intro photo is in view; align height with photo top/bottom; transition only when image is seen
+    // Bottom-right: advance one section at a time (wraps to top after last); also dismisses intro cover
     (function() {
-      const overlay = document.getElementById('introOverlay');
-      const photoSection = document.getElementById('photo-section');
-      const quote = document.getElementById('quote');
-      if (!overlay || !photoSection || !quote) return;
-      let quoteInView = true;
-      let photoInView = false;
-
-      function setPhotoStripVars() {
-        var r = photoSection.getBoundingClientRect();
-        overlay.style.setProperty('--photo-top', r.top + 'px');
-        overlay.style.setProperty('--photo-height', r.height + 'px');
+      var btn = document.getElementById('scrollStepDown');
+      if (!btn) return;
+      var ids = ['section-hero', 'about', 'realizations', 'speculative-futures', 'present-realities'];
+      var scrollBlocks = ['center', 'start', 'start', 'start', 'start'];
+      function getSections() {
+        return ids.map(function(id) { return document.getElementById(id); }).filter(Boolean);
       }
-
-      function updateStrips() {
-        if (!quoteInView && photoInView) {
-          overlay.classList.add('strips-extended');
-          setPhotoStripVars();
-        } else {
-          overlay.classList.remove('strips-extended');
+      btn.addEventListener('click', function() {
+        if (document.body.classList.contains('intro-active')) {
+          if (typeof window.hideIntroCover === 'function') window.hideIntroCover();
+          return;
         }
-      }
-
-      var quoteOpts = { threshold: 0.01, rootMargin: '0px' };
-      var photoOpts = { threshold: 0.02, rootMargin: '0px 0px -25% 0px' };
-      var quoteObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) { quoteInView = entry.isIntersecting; });
-        updateStrips();
-      }, quoteOpts);
-      var photoObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) { photoInView = entry.isIntersecting; });
-        updateStrips();
-      }, photoOpts);
-      quoteObserver.observe(quote);
-      photoObserver.observe(photoSection);
-
-      window.addEventListener('scroll', function() {
-        if (overlay.classList.contains('strips-extended')) setPhotoStripVars();
-      }, { passive: true });
-      window.addEventListener('resize', function() {
-        if (overlay.classList.contains('strips-extended')) setPhotoStripVars();
+        var sections = getSections();
+        if (!sections.length) return;
+        var probe = window.scrollY + 90;
+        var currentIdx = 0;
+        var i;
+        for (i = 0; i < sections.length; i++) {
+          var start = sections[i].getBoundingClientRect().top + window.scrollY;
+          if (probe >= start) currentIdx = i;
+          else break;
+        }
+        var nextIdx = currentIdx + 1;
+        if (nextIdx < sections.length) {
+          if (ids[nextIdx] === 'about') {
+            var navEl = document.querySelector('.section-nav');
+            var navH = navEl ? navEl.offsetHeight : 52;
+            var aboutEl = sections[nextIdx];
+            var y = aboutEl.getBoundingClientRect().top + window.scrollY - navH - 6;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          } else {
+            sections[nextIdx].scrollIntoView({
+              behavior: 'smooth',
+              block: scrollBlocks[nextIdx] || 'start',
+              inline: 'nearest'
+            });
+          }
+        } else {
+          if (typeof window.scrollQuoteIntoView === 'function') window.scrollQuoteIntoView();
+        }
       });
     })();
 
@@ -910,7 +1190,7 @@
     function animate() {
       ballX += (mouseX - ballX) * speed;
       ballY += (mouseY - ballY) * speed;
-      const offset = (ball.classList.contains('over-renders-gallery') || ball.classList.contains('over-projects-gallery')) ? 70 : 18;
+      const offset = (ball.classList.contains('over-renders-gallery') || ball.classList.contains('over-projects-gallery') || ball.classList.contains('over-realizations-gallery')) ? 70 : 18;
       ball.style.left = ballX - offset + 'px';
       ball.style.top = ballY - offset + 'px';
       const under = document.elementFromPoint(mouseX, mouseY);
@@ -919,22 +1199,38 @@
       const overYellowArea = under && under.closest && (under.closest('.marker') || under.closest('.intro-strip-bottom'));
       const overRendersGallery = under && under.closest && under.closest('#renders-gallery');
       const overProjectsGallery = under && under.closest && under.closest('#projects-gallery');
+      const overRealizationsGallery = under && under.closest && under.closest('#realizations-gallery');
       if (overPinkText) {
         ball.classList.add('over-pink-text');
         ball.classList.remove('over-marker');
         ball.classList.remove('over-renders-gallery');
         ball.classList.remove('over-projects-gallery');
+        ball.classList.remove('over-realizations-gallery');
       } else if (overYellowArea) {
         ball.classList.remove('over-pink-text');
         ball.classList.add('over-marker');
         ball.classList.remove('over-renders-gallery');
         ball.classList.remove('over-projects-gallery');
+        ball.classList.remove('over-realizations-gallery');
       } else if (overRendersGallery) {
         ball.classList.remove('over-marker');
         ball.classList.remove('over-pink-text');
         ball.classList.remove('over-projects-gallery');
+        ball.classList.remove('over-realizations-gallery');
         ball.classList.add('over-renders-gallery');
         const gallery = document.getElementById('renders-gallery');
+        if (gallery) {
+          const rect = gallery.getBoundingClientRect();
+          gallery.style.setProperty('--cursor-x', (ballX - rect.left) + 'px');
+          gallery.style.setProperty('--cursor-y', (ballY - rect.top) + 'px');
+        }
+      } else if (overRealizationsGallery) {
+        ball.classList.remove('over-marker');
+        ball.classList.remove('over-pink-text');
+        ball.classList.remove('over-renders-gallery');
+        ball.classList.remove('over-projects-gallery');
+        ball.classList.add('over-realizations-gallery');
+        const gallery = document.getElementById('realizations-gallery');
         if (gallery) {
           const rect = gallery.getBoundingClientRect();
           gallery.style.setProperty('--cursor-x', (ballX - rect.left) + 'px');
@@ -944,6 +1240,7 @@
         ball.classList.remove('over-marker');
         ball.classList.remove('over-pink-text');
         ball.classList.remove('over-renders-gallery');
+        ball.classList.remove('over-realizations-gallery');
         ball.classList.add('over-projects-gallery');
         const gallery = document.getElementById('projects-gallery');
         if (gallery) {
@@ -956,6 +1253,7 @@
         ball.classList.remove('over-pink-text');
         ball.classList.remove('over-renders-gallery');
         ball.classList.remove('over-projects-gallery');
+        ball.classList.remove('over-realizations-gallery');
       }
       requestAnimationFrame(animate);
     }
@@ -1066,6 +1364,85 @@
         if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIndex - 1); }
         if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex + 1); }
       });
+    })();
+
+    // Realizations showcase gallery (same behavior as renders / projects)
+    (function() {
+      const gallery = document.getElementById('realizations-gallery');
+      if (!gallery) return;
+
+      gallery.addEventListener('mousemove', function() {
+        gallery.classList.add('cursor-over');
+      });
+      gallery.addEventListener('mouseleave', function() {
+        gallery.classList.remove('cursor-over');
+      });
+      const slides = gallery.querySelectorAll('.realizations-gallery-slide');
+      const prevBtn = gallery.querySelector('.realizations-gallery-arrow.prev');
+      const nextBtn = gallery.querySelector('.realizations-gallery-arrow.next');
+      const dotsContainer = gallery.querySelector('.realizations-gallery-dots');
+      let currentIndex = 0;
+
+      function goTo(index) {
+        currentIndex = ((index % slides.length) + slides.length) % slides.length;
+        slides.forEach(function(s, i) {
+          s.classList.toggle('active', i === currentIndex);
+        });
+        if (dotsContainer) {
+          dotsContainer.querySelectorAll('.realizations-gallery-dot').forEach(function(d, i) {
+            d.classList.toggle('active', i === currentIndex);
+          });
+        }
+      }
+
+      if (dotsContainer) {
+        for (let i = 0; i < slides.length; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'realizations-gallery-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+          dot.type = 'button';
+          dot.addEventListener('click', function() { goTo(i); });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          goTo(currentIndex - 1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          goTo(currentIndex + 1);
+        });
+      }
+
+      gallery.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIndex - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex + 1); }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var title = document.querySelector('.about-photo-name-title');
+      var bio = document.querySelector('.about-bio');
+      if (!title || !bio) return;
+      function syncBioWidth() {
+        var w = title.getBoundingClientRect().width;
+        if (w > 0) bio.style.maxWidth = Math.ceil(w) + 'px';
+      }
+      syncBioWidth();
+      window.addEventListener('resize', syncBioWidth);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncBioWidth);
+      window.addEventListener('load', syncBioWidth);
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(syncBioWidth).observe(title);
+      }
     })();
   </script>
 

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Realizations - Rajvi Ranjit Patil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      cursor: none;
+    }
+    a, button {
+      cursor: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      color: rgb(233, 30, 140);
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      margin: 20px 0 0 calc(1.5rem + 20px);
+      max-width: 850px;
+      text-align: left;
+      font-family: 'Roboto Mono', monospace;
+      color: transparent;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+    }
+
+    .tabs-row {
+      display: flex;
+      justify-content: flex-start;
+      max-width: 850px;
+      margin: 0 0 2rem calc(1.5rem + 20px);
+      padding: 1rem 0 0;
+      border-bottom: 2px solid #eee;
+    }
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      background: transparent;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.95rem;
+      color: #666;
+      cursor: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover {
+      color: #333;
+    }
+    .tab-btn.active {
+      color: rgb(233, 30, 140);
+      border-bottom-color: rgb(233, 30, 140);
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      max-width: 980px;
+      margin: 0 0 0 1.5rem;
+      padding: 0 20px 3rem;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 0 2rem;
+      border-radius: 0;
+    }
+
+    .tab-panel h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.5em;
+      margin: 0 0 0.25rem;
+      max-width: 850px;
+      text-align: left;
+      color: #111;
+    }
+    .tab-panel .tab-subheading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      text-align: left;
+      color: black;
+      margin: 0 0 1rem;
+      max-width: 850px;
+      line-height: 1.45;
+    }
+    .project-meta {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      color: black;
+      margin: 0 0 1.75rem;
+      padding-top: 0.15rem;
+      max-width: 850px;
+      line-height: 1.55;
+    }
+    .project-meta p {
+      margin: 0.4rem 0;
+    }
+    .media-container {
+      width: 100%;
+      max-width: 850px;
+      margin: 0;
+      text-align: left;
+    }
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+      border-radius: 0;
+    }
+    /* Secondary MORPH figures: fixed frame, image centered inside — no overflow into text */
+    #morph .media-container .morph-figure-slot {
+      position: relative;
+      width: 100%;
+      height: clamp(260px, 56vh, 68vh);
+      margin: 1.5rem 0 28px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    #morph .media-container .morph-figure-slot img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      max-width: calc(100% - 16px);
+      max-height: calc(100% - 16px);
+      object-fit: contain;
+      margin: 0;
+      display: block;
+    }
+
+    .media-container .text-block {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      margin: 0 0 1.75rem;
+      max-width: 850px;
+      color: #111;
+    }
+    .media-container .text-block p {
+      margin: 0 0 1rem;
+    }
+    .media-container .text-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    #morph .media-container img:first-child {
+      max-height: none;
+    }
+
+    /* Following ball – matches index page */
+    .follow-ball {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="follow-ball" id="followBall"></div>
+
+  <a href="index.html#realizations-gallery" class="back-link">← Back to future</a>
+
+  <h1>Realizations</h1>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" data-tab="morph" type="button">MORPH</button>
+  </div>
+
+  <div id="morph" class="tab-panel active">
+    <h2>MORPH</h2>
+    <p class="tab-subheading">Startup · Closed-loop, personalized footwear system</p>
+    <div class="project-meta">
+      <p><strong>Co-founders:</strong> Iqra, Jay, Ian</p>
+      <p><strong>My Role:</strong> Concept originator and founder. As CEO, responsible for defining the vision, building the team, and leading the development of the product and system.</p>
+    </div>
+    <div class="media-container">
+      <img src="photos_realizations/morph.png" alt="Morph — key visual">
+      <div class="text-block">
+        <p>MORPH is an active realization of my broader explorations around closed-loop systems, localized production, and adaptive design. It translates speculative ideas into a tangible product system reimagining how footwear can be designed, produced, used, and reintegrated. The focus is on building deployable systems that reduce waste while adapting to individual needs.</p>
+      </div>
+      <div class="morph-figure-slot">
+        <img src="photos_realizations/technology info.png" alt="Morph — technology overview">
+      </div>
+      <div class="text-block">
+        <p>At its core, MORPH operates as a closed-loop footwear system. Users scan their feet, customize fit and design, receive a 3D-printed shoe, and return it for recycling into future prints. This creates a continuous material and data loop that improves fit over time while minimizing excess production.</p>
+      </div>
+      <div class="morph-figure-slot">
+        <img src="photos_realizations/visuals.png" alt="Morph — visuals">
+      </div>
+      <div class="text-block">
+        <p>The initial user group is parents of children aged 4–8. This is a high-growth phase where shoes are replaced frequently, and purchasing decisions prioritize comfort, adaptability, and ease. MORPH addresses this by offering a system that evolves with the child while reducing the need for repeated, wasteful purchases.</p>
+      </div>
+      <div class="morph-figure-slot">
+        <img src="photos_realizations/user journey.png" alt="Morph — user journey">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    function showTab(tabId) {
+      tabBtns.forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+      tabPanels.forEach(function(panel) {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+      history.replaceState(null, '', '#' + tabId);
+    }
+
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showTab(btn.dataset.tab);
+      });
+    });
+
+    function openFromHash() {
+      const hash = window.location.hash.slice(1);
+      if (hash === 'morph') {
+        showTab('morph');
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
+    const ball = document.getElementById('followBall');
+    let mouseX = 0, mouseY = 0, ballX = 0, ballY = 0;
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    function animate() {
+      ballX += (mouseX - ballX) * 0.1;
+      ballY += (mouseY - ballY) * 0.1;
+      ball.style.left = (ballX - 18) + 'px';
+      ball.style.top = (ballY - 18) + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+</html>
