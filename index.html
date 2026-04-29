@@ -293,6 +293,77 @@
       margin: 0 0 0.35rem;
       padding: 0 var(--page-margin);
     }
+    .approach-section-wrap {
+      margin-top: 2rem;
+      padding: 0 var(--page-margin);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .approach-heading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: transparent;
+      margin: 0 0 0.75rem;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+      display: inline-block;
+    }
+    .approach-subtext {
+      margin: 0;
+      max-width: 62rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(calc(1.8rem - 2pt), calc(5vw - 2pt), calc(3.2rem - 2pt));
+      font-weight: 400;
+      line-height: 1.6;
+      color: #1a1a1a;
+    }
+    .approach-subtext .marker {
+      background: linear-gradient(to bottom, transparent 14%, rgb(251, 247, 25) 14%, rgb(251, 247, 25) 86%, transparent 86%);
+      padding: 0.05em 0.12em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    .approach-circles-row {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.7rem;
+      max-width: 68rem;
+    }
+    .approach-circles-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(0.8rem, 1.5vw, 0.96rem);
+      font-weight: 500;
+      color: #9a9a9a;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+    .approach-circles {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+    .approach-circle-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1rem;
+      border: 2px solid rgb(233, 30, 140);
+      border-radius: 999px;
+      background: transparent;
+      color: rgb(233, 30, 140);
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(0.78rem, 1.45vw, 0.95rem);
+      font-weight: 500;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+    }
 
     /* Photo section: filler on left; right column matches image height */
     .photo-section {
@@ -421,6 +492,37 @@
       -webkit-text-stroke: 2px rgb(233, 30, 140);
       paint-order: stroke fill;
       display: inline-block;
+    }
+    .selected-honors-wrap {
+      margin-top: var(--section-gap);
+      margin-bottom: var(--section-gap);
+      padding: 0 var(--page-margin);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .selected-honors-heading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: transparent;
+      margin: 0 0 1.25rem;
+      -webkit-text-stroke: 2px rgb(233, 30, 140);
+      paint-order: stroke fill;
+      display: inline-block;
+    }
+    .selected-honors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+      align-items: stretch;
+      max-width: 900px;
+    }
+    .selected-honors-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      display: block;
+      background: #fff;
     }
 
     /* Speculative futures section heading */
@@ -902,6 +1004,9 @@
         padding-left: var(--page-margin);
         gap: 0.75rem;
       }
+      .selected-honors-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -929,9 +1034,9 @@
   <!-- Main content (revealed after first scroll) -->
   <div class="main-content-wrap">
   <nav class="section-nav" aria-label="Jump to section">
-    <a href="#realizations">Realizations</a>
     <a href="#speculative-futures">Speculative futures</a>
     <a href="#projects-gallery">Present realities</a>
+    <a href="#realizations">Realizations</a>
   </nav>
   <div class="main-content">
     <!-- Full-page comic hero -->
@@ -963,18 +1068,19 @@
     </section>
     </div>
 
-    <!-- Realizations: full-bleed showcase (like Speculative / Present) -->
-    <div class="realizations-wrap" id="realizations">
-      <h2 class="realizations-heading">Realizations</h2>
-      <section class="renders-gallery realizations-gallery single-slide" id="realizations-gallery" aria-label="Realizations showcase">
-        <button class="realizations-gallery-arrow prev" aria-label="Previous" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M58 4 L58 92 L6 48 Z"/></svg></button>
-        <button class="realizations-gallery-arrow next" aria-label="Next" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M6 4 L6 92 L58 48 Z"/></svg></button>
-        <div class="realizations-gallery-slide active" data-index="0">
-          <a href="realizations.html#morph"><span class="renders-gallery-bg" style="background-image: url('photos_realizations/morph.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_realizations/morph.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">MORPH</span><span class="renders-gallery-subheading">Startup · Closed-loop, personalized footwear system</span></div></a>
-        </div>
-        <div class="realizations-gallery-dots" aria-hidden="true"></div>
-      </section>
-    </div>
+    <section class="approach-section-wrap" id="approach">
+      <h2 class="approach-heading">Approach</h2>
+      <p class="approach-subtext">Challenging <span class="marker">existing systems</span> through <span class="marker">bold interventions</span> that drive meaningful <span class="marker">impact</span> for <span class="marker">people and planet</span>.</p>
+      <div class="approach-circles-row">
+        <span class="approach-circles-label">existing systems</span>
+        <ul class="approach-circles" aria-label="Areas challenged">
+          <li class="approach-circle-item">Mass Manufactured Apparel</li>
+          <li class="approach-circle-item">Passive Architecture</li>
+          <li class="approach-circle-item">Static Digital Archiving</li>
+          <li class="approach-circle-item">Screen Based AI</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- Speculative futures: heading + renders gallery -->
     <div class="speculative-futures-wrap" id="speculative-futures">
@@ -1020,6 +1126,28 @@
         <div class="projects-gallery-dots" aria-hidden="true"></div>
       </section>
     </div>
+
+    <!-- Realizations: full-bleed showcase (like Speculative / Present) -->
+    <div class="realizations-wrap" id="realizations">
+      <h2 class="realizations-heading">Realizations</h2>
+      <section class="renders-gallery realizations-gallery single-slide" id="realizations-gallery" aria-label="Realizations showcase">
+        <button class="realizations-gallery-arrow prev" aria-label="Previous" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M58 4 L58 92 L6 48 Z"/></svg></button>
+        <button class="realizations-gallery-arrow next" aria-label="Next" type="button"><svg width="64" height="96" viewBox="0 0 64 96" fill="none" stroke="rgb(233, 30, 140)" stroke-width="5" stroke-linejoin="round"><path d="M6 4 L6 92 L58 48 Z"/></svg></button>
+        <div class="realizations-gallery-slide active" data-index="0">
+          <a href="realizations.html#morph"><span class="renders-gallery-bg" style="background-image: url('photos_realizations/morph.png');"></span><span class="renders-gallery-color" style="background-image: url('photos_realizations/morph.png');"></span><div class="renders-gallery-caption"><span class="renders-gallery-heading">MORPH</span><span class="renders-gallery-subheading">Startup · Closed-loop, personalized footwear system</span></div></a>
+        </div>
+        <div class="realizations-gallery-dots" aria-hidden="true"></div>
+      </section>
+    </div>
+
+    <section class="selected-honors-wrap" id="selected-honors" aria-label="Selected Exhibits and Honors">
+      <h2 class="selected-honors-heading">Selected Exhibits &amp; Honors</h2>
+      <div class="selected-honors-grid">
+        <img class="selected-honors-image" src="photos_ideas/Cornell Tech.png" alt="Cornell Tech exhibit or honor" />
+        <img class="selected-honors-image" src="photos_ideas/MIT.JPG" alt="MIT exhibit or honor" />
+        <img class="selected-honors-image" src="photos_ideas/Anthropic.jpg" alt="Anthropic exhibit or honor" />
+      </div>
+    </section>
 
   </div>
   </div>
@@ -1133,8 +1261,8 @@
     (function() {
       var btn = document.getElementById('scrollStepDown');
       if (!btn) return;
-      var ids = ['section-hero', 'about', 'realizations', 'speculative-futures', 'present-realities'];
-      var scrollBlocks = ['center', 'start', 'start', 'start', 'start'];
+      var ids = ['section-hero', 'about', 'speculative-futures', 'present-realities', 'realizations', 'selected-honors'];
+      var scrollBlocks = ['center', 'start', 'start', 'start', 'start', 'start'];
       function getSections() {
         return ids.map(function(id) { return document.getElementById(id); }).filter(Boolean);
       }
