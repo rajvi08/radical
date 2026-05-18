@@ -252,8 +252,23 @@
     #bespoke-apparel .morphable-mannequin h3 {
       color: rgb(233, 30, 140);
     }
-    #bespoke-apparel .morphable-mannequin img {
+    #bespoke-apparel .mannequin-gallery {
+      max-width: 850px;
+    }
+    #bespoke-apparel .mannequin-gallery img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+      margin: 0 0 2rem;
+    }
+    #bespoke-apparel .morphable-mannequin > .mannequin-gallery img:first-child {
       margin-top: 1.5rem;
+    }
+    #bespoke-apparel .morphable-mannequin .mannequin-gallery img.mannequin2-img {
+      min-height: 68vh;
+      max-height: 92vh;
     }
     #bespoke-apparel .mannequin-feedback-block {
       margin-top: 0.5rem;
@@ -548,8 +563,11 @@
     <div class="speculative-section morphable-mannequin">
       <h3>Morphable Mannequin</h3>
       <p>To demonstrate a proof of concept, the morphable mannequin part of the complete experience flow was developed. Meta material experiments were carried out to create surfaces that change shape. This project was also displayed for the Cornell Tech open house, which was an opportunity to interact with people and professionals and hear their thoughts.</p>
-      <img src="photos_speculative/mannequin.png" alt="Morphable mannequin">
-      <img src="photos_speculative/exhibition_mannequin.JPG" alt="Morphable mannequin at Cornell Tech open house">
+      <div class="mannequin-gallery">
+        <img class="mannequin2-img" src="photos_speculative/mannequin2.png" alt="Morphable mannequin">
+        <img src="photos_speculative/exhibition_mannequin.JPG" alt="Morphable mannequin at Cornell Tech open house">
+        <img src="photos_speculative/mannequin1.png" alt="Morphable mannequin">
+      </div>
       <div class="mannequin-feedback-block">
         <p class="mannequin-feedback">" Interesting concept but how do you plan on integrating various technologies, the scanning and the spray-on fabric part?" — <span class="mannequin-feedback-visitor">Visitor 1</span></p>
         <p class="mannequin-feedback">"The solvent used in the spray on fabric, is it sustainable?" — <span class="mannequin-feedback-visitor">Visitor 2</span></p>

@@ -214,6 +214,55 @@
       margin-bottom: 0;
     }
 
+    #morph .morph-meetup {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #eee;
+      max-width: 850px;
+    }
+    #morph .morph-meetup h3 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgb(233, 30, 140);
+      margin: 0 0 0.75rem;
+      text-align: left;
+    }
+    #morph .morph-meetup-text {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      margin: 0 0 1.5rem;
+      color: #111;
+      max-width: 850px;
+    }
+    #morph .morph-meetup-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    #morph .morph-meetup-gallery .morph-meetup-img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      object-position: left center;
+      margin: 0;
+    }
+    #morph .morph-meetup-feedback-block {
+      margin-top: 0.5rem;
+    }
+    #morph .morph-meetup-feedback {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      line-height: 1.6em;
+      font-style: italic;
+      color: black;
+      margin: 0;
+    }
+    #morph .morph-meetup-feedback-visitor {
+      color: rgb(233, 30, 140);
+      font-style: italic;
+    }
     #morph .media-container img:first-child {
       max-height: none;
     }
@@ -347,6 +396,17 @@
       </div>
       </aside>
     </div>
+    <section class="morph-meetup" aria-labelledby="morph-meetup-heading">
+      <h3 id="morph-meetup-heading">Showcased at NY Hardware Meetup</h3>
+      <p class="morph-meetup-text">Visitors engaged directly with the lattice swatches, interacting with the material through touch and exploration. The tactile nature of the experience sparked curiosity, prompting questions and a sense of excitement around the possibilities of the system.</p>
+      <div class="morph-meetup-gallery">
+        <img class="morph-meetup-img" src="photos_speculative/morph1.png" alt="MORPH at NY Hardware Meetup">
+        <img class="morph-meetup-img" src="photos_speculative/morph2.png" alt="MORPH at NY Hardware Meetup">
+      </div>
+      <div class="morph-meetup-feedback-block">
+        <p class="morph-meetup-feedback">"These lattice swatches could have other applications, like shock absorption in car seats." — <span class="morph-meetup-feedback-visitor">Visitor 1</span></p>
+      </div>
+    </section>
   </div>
 
   <script>
