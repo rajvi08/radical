@@ -554,6 +554,14 @@
       flex-shrink: 0;
       background: transparent;
     }
+    .selected-honors-image.rollsroyce {
+      height: clamp(2.5rem, 6.5vw, 4rem);
+      max-width: 13rem;
+    }
+    .selected-honors-image.cornell-tech {
+      height: clamp(5rem, 13vw, 8rem);
+      max-width: 24rem;
+    }
     @keyframes selected-honors-marquee {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
@@ -1128,14 +1136,16 @@
       <div class="selected-honors-marquee">
         <div class="selected-honors-track">
           <div class="selected-honors-slide">
-            <img class="selected-honors-image" src="photos_ideas/Cornell Tech.png" alt="Cornell Tech exhibit or honor" />
+            <img class="selected-honors-image cornell-tech" src="photos_ideas/Cornell Tech.png" alt="Cornell Tech exhibit or honor" />
             <img class="selected-honors-image" src="photos_ideas/MIT.JPG" alt="MIT exhibit or honor" />
+            <img class="selected-honors-image rollsroyce" src="photos_ideas/rollsroyce.png" alt="Rolls-Royce Motor Cars exhibit or honor" />
             <img class="selected-honors-image" src="photos_ideas/Anthropic.jpg" alt="Anthropic exhibit or honor" />
             <img class="selected-honors-image" src="photos_ideas/NY_meetup.jpg" alt="NY Hardware Meetup exhibit" />
           </div>
           <div class="selected-honors-slide" aria-hidden="true">
-            <img class="selected-honors-image" src="photos_ideas/Cornell Tech.png" alt="" />
+            <img class="selected-honors-image cornell-tech" src="photos_ideas/Cornell Tech.png" alt="" />
             <img class="selected-honors-image" src="photos_ideas/MIT.JPG" alt="" />
+            <img class="selected-honors-image rollsroyce" src="photos_ideas/rollsroyce.png" alt="" />
             <img class="selected-honors-image" src="photos_ideas/Anthropic.jpg" alt="" />
             <img class="selected-honors-image" src="photos_ideas/NY_meetup.jpg" alt="" />
           </div>
