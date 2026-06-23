@@ -312,10 +312,7 @@
       will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      gap: 0;
-    }
-    .open-studio-track.is-ready {
-      animation: open-studio-marquee var(--marquee-duration, 52s) linear infinite;
+      animation: open-studio-marquee 52s linear infinite;
     }
     .open-studio-track:hover {
       animation-play-state: paused;
@@ -352,7 +349,7 @@
       .open-studio-marquee {
         overflow-x: auto;
       }
-      .open-studio-track.is-ready {
+      .open-studio-track {
         animation: none;
       }
     }
@@ -1184,11 +1181,18 @@
       <div class="open-studio-marquee">
         <div class="open-studio-track">
           <div class="open-studio-set">
-            <img class="open-studio-image" loading="eager" decoding="sync" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20%282%29.jpeg" alt="" />
-            <img class="open-studio-image" loading="eager" decoding="sync" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20%283%29.jpeg" alt="" />
-            <img class="open-studio-image" loading="eager" decoding="sync" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.29%20PM.jpeg" alt="" />
-            <img class="open-studio-image" loading="eager" decoding="sync" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM.jpeg" alt="" />
-            <img class="open-studio-image" loading="eager" decoding="sync" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.39%20PM.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-01.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-02.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-03.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-04.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-05.jpeg" alt="" />
+          </div>
+          <div class="open-studio-set" aria-hidden="true">
+            <img class="open-studio-image" src="photos_openstudio/openstudio-01.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-02.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-03.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-04.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/openstudio-05.jpeg" alt="" />
           </div>
         </div>
       </div>
@@ -1702,14 +1706,6 @@
       var set = document.querySelector('.open-studio-set');
       if (!track || !set) return;
 
-      var clone = set.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.querySelectorAll('img').forEach(function (img) {
-        img.setAttribute('alt', '');
-        img.removeAttribute('loading');
-      });
-      track.appendChild(clone);
-
       function syncMarqueeShift() {
         var distance = Math.round(set.getBoundingClientRect().width);
         if (distance > 0) {
@@ -1717,35 +1713,10 @@
         }
       }
 
-      function markReady() {
-        requestAnimationFrame(function () {
-          syncMarqueeShift();
-          requestAnimationFrame(function () {
-            syncMarqueeShift();
-            track.classList.add('is-ready');
-          });
-        });
-      }
-
-      var imgs = track.querySelectorAll('img');
-      var pending = imgs.length;
-      function onImageReady() {
-        pending -= 1;
-        if (pending <= 0) markReady();
-      }
-
-      imgs.forEach(function (img) {
-        img.addEventListener('error', function () {
-          img.style.visibility = 'hidden';
-          onImageReady();
-        });
-        if (img.complete) onImageReady();
-        else img.addEventListener('load', onImageReady);
-      });
-
-      track.addEventListener('animationiteration', syncMarqueeShift);
+      window.addEventListener('load', syncMarqueeShift);
       window.addEventListener('resize', syncMarqueeShift);
-      if (pending === 0) markReady();
+      track.addEventListener('animationiteration', syncMarqueeShift);
+      syncMarqueeShift();
     })();
   </script>
   <script>
