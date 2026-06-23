@@ -293,6 +293,72 @@
       margin: 0 0 0.35rem;
       padding: 0 var(--page-margin);
     }
+    .open-studio-wrap {
+      margin-top: 2rem;
+      margin-bottom: 0;
+      padding: 0 var(--page-margin);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .open-studio-marquee {
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #000 5%,
+        #000 95%,
+        transparent
+      );
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #000 5%,
+        #000 95%,
+        transparent
+      );
+    }
+    .open-studio-track {
+      display: flex;
+      width: max-content;
+      animation: open-studio-marquee 52s linear infinite;
+    }
+    .open-studio-track:hover {
+      animation-play-state: paused;
+    }
+    .open-studio-slide {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.25rem;
+      padding-right: 1.25rem;
+      flex-shrink: 0;
+    }
+    .open-studio-image {
+      height: clamp(10rem, 22vw, 16rem);
+      width: auto;
+      max-width: 27rem;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+    @keyframes open-studio-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .open-studio-marquee {
+        overflow-x: auto;
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+      .open-studio-track {
+        animation: none;
+      }
+    }
     .approach-section-wrap {
       margin-top: 2rem;
       padding: 0 var(--page-margin);
@@ -1117,6 +1183,27 @@
     </section>
     </div>
 
+    <section class="open-studio-wrap" id="open-studio" aria-label="Open studio">
+      <div class="open-studio-marquee">
+        <div class="open-studio-track">
+          <div class="open-studio-slide">
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (2).jpeg" alt="Open studio" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (3).jpeg" alt="Open studio" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.29 PM.jpeg" alt="Open studio" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM.jpeg" alt="Open studio" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.39 PM.jpeg" alt="Open studio" />
+          </div>
+          <div class="open-studio-slide" aria-hidden="true">
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (2).jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (3).jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.29 PM.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM.jpeg" alt="" />
+            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.39 PM.jpeg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="approach-section-wrap" id="approach">
       <h2 class="approach-heading">Approach</h2>
       <p class="approach-subtext">Challenging <span class="marker">existing systems</span> through <span class="marker">bold interventions</span> that drive meaningful <span class="marker">impact</span> for <span class="marker">people and planet</span>.</p>
@@ -1325,8 +1412,8 @@
     (function() {
       var btn = document.getElementById('scrollStepDown');
       if (!btn) return;
-      var ids = ['section-hero', 'about', 'approach', 'selected-honors', 'speculative-futures', 'present-realities', 'realizations'];
-      var scrollBlocks = ['center', 'start', 'start', 'start', 'start', 'start', 'start'];
+      var ids = ['section-hero', 'about', 'open-studio', 'approach', 'selected-honors', 'speculative-futures', 'present-realities', 'realizations'];
+      var scrollBlocks = ['center', 'start', 'start', 'start', 'start', 'start', 'start', 'start'];
       function getSections() {
         return ids.map(function(id) { return document.getElementById(id); }).filter(Boolean);
       }
