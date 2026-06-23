@@ -304,36 +304,28 @@
       overflow: hidden;
       width: 100%;
       max-width: 100%;
-      mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #000 5%,
-        #000 95%,
-        transparent
-      );
-      -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #000 5%,
-        #000 95%,
-        transparent
-      );
+      min-height: clamp(10rem, 22vw, 16rem);
     }
     .open-studio-track {
       display: flex;
       width: max-content;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .open-studio-track.is-ready {
       animation: open-studio-marquee 52s linear infinite;
     }
     .open-studio-track:hover {
       animation-play-state: paused;
     }
-    .open-studio-slide {
+    .open-studio-set {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 1.25rem;
       padding-right: 1.25rem;
-      flex-shrink: 0;
+      flex: 0 0 auto;
     }
     .open-studio-image {
       height: clamp(10rem, 22vw, 16rem);
@@ -344,18 +336,19 @@
       display: block;
       flex-shrink: 0;
       border-radius: 2px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translateZ(0);
     }
     @keyframes open-studio-marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(calc(-1 * var(--marquee-shift, 50%)), 0, 0); }
     }
     @media (prefers-reduced-motion: reduce) {
       .open-studio-marquee {
         overflow-x: auto;
-        mask-image: none;
-        -webkit-mask-image: none;
       }
-      .open-studio-track {
+      .open-studio-track.is-ready {
         animation: none;
       }
     }
@@ -1186,19 +1179,19 @@
     <section class="open-studio-wrap" id="open-studio" aria-label="Open studio">
       <div class="open-studio-marquee">
         <div class="open-studio-track">
-          <div class="open-studio-slide">
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (2).jpeg" alt="Open studio" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (3).jpeg" alt="Open studio" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.29 PM.jpeg" alt="Open studio" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM.jpeg" alt="Open studio" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.39 PM.jpeg" alt="Open studio" />
+          <div class="open-studio-set">
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20(2).jpeg" alt="Open studio" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20(3).jpeg" alt="Open studio" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.29%20PM.jpeg" alt="Open studio" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM.jpeg" alt="Open studio" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.39%20PM.jpeg" alt="Open studio" />
           </div>
-          <div class="open-studio-slide" aria-hidden="true">
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (2).jpeg" alt="" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM (3).jpeg" alt="" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.29 PM.jpeg" alt="" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.23.44 PM.jpeg" alt="" />
-            <img class="open-studio-image" src="photos_openstudio/WhatsApp Image 2026-06-23 at 5.24.39 PM.jpeg" alt="" />
+          <div class="open-studio-set" aria-hidden="true">
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20(2).jpeg" alt="" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM%20(3).jpeg" alt="" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.29%20PM.jpeg" alt="" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.23.44%20PM.jpeg" alt="" />
+            <img class="open-studio-image" loading="eager" decoding="async" src="photos_openstudio/WhatsApp%20Image%202026-06-23%20at%205.24.39%20PM.jpeg" alt="" />
           </div>
         </div>
       </div>
@@ -1704,6 +1697,43 @@
         if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIndex - 1); }
         if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex + 1); }
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      var track = document.querySelector('.open-studio-track');
+      var set = document.querySelector('.open-studio-set');
+      if (!track || !set) return;
+
+      function syncMarqueeShift() {
+        var distance = Math.round(set.getBoundingClientRect().width);
+        if (distance > 0) {
+          track.style.setProperty('--marquee-shift', distance + 'px');
+        }
+      }
+
+      function markReady() {
+        syncMarqueeShift();
+        track.classList.add('is-ready');
+      }
+
+      var imgs = track.querySelectorAll('img');
+      var pending = imgs.length;
+      function onImageReady() {
+        pending -= 1;
+        if (pending <= 0) markReady();
+      }
+
+      imgs.forEach(function (img) {
+        if (img.complete) onImageReady();
+        else {
+          img.addEventListener('load', onImageReady);
+          img.addEventListener('error', onImageReady);
+        }
+      });
+
+      window.addEventListener('resize', syncMarqueeShift);
+      if (pending === 0) markReady();
     })();
   </script>
   <script>
